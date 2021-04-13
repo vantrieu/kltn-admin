@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { PrivateRoute } from './components';
 import { Login } from './pages/Account';
 import { Admin } from './pages/Admin/Admin';
+import { AccountRoute } from './components/AccountRoute';
 
 function App() {
   return (
@@ -10,7 +11,12 @@ function App() {
       <Router>
         <Switch>
           <PrivateRoute>
-            <Admin />
+            <AccountRoute>
+              <Login />
+            </AccountRoute>
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
           </PrivateRoute>
         </Switch>
       </Router>
