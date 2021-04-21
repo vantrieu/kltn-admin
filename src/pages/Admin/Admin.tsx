@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
 import Footer from './Components/Footer';
 import LeftMenu from './Components/LefMenu';
 import TopNavBar from './Components/TopNavbar';
+import EditProfile from './Profile/EditProfile';
+import ViewProfile from './Profile/ViewProfile';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -18,12 +20,17 @@ export const Admin = () => {
                 <div id="content">
                     <TopNavBar />
                     <div className="container-fluid">
-                        {/* <Route exact path='/'>
-                            <Home />
+                        <Route exact path='/my-profile'>
+                            <ViewProfile />
                         </Route>
-                        <Route exact path='/product/:id' component={EditProduct}>
+                        <Route exact path='/update-profile'>
+                            <EditProfile />
+                        </Route>
+                        {/* <Route exact path='/profile/:id' component={EditProduct}>
                         </Route> */}
-                        <h1>Render SPA!</h1>
+                        {/* <Route exact={true} path=''>
+                            <NotFound />
+                        </Route> */}
                     </div>
                 </div>
                 <Footer />

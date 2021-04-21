@@ -12,7 +12,7 @@ export interface AuthenticatedUser {
     _id: string;
     firstname: string;
     lastname: string;
-    username: string;
+    gender: string;
     avatar: string;
     birthday: string;
 }
