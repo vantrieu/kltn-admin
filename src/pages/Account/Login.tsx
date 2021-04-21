@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../store';
 import { useLocation } from 'react-router';
 import { login, logout } from '../../store/Account/actions';
+import { AccountState } from '../../store/Account/types';
 
 export const Login = () => {
     const [inputs, setInputs] = useState({
@@ -12,7 +13,7 @@ export const Login = () => {
     });
     const [submitted, setSubmitted] = useState(false);
 
-    const loading = useSelector<AppState>((state) => state.account.loading);
+    const account = useSelector<AppState>((state) => state.account) as AccountState;
 
     const { username , password } = inputs;
 
@@ -39,18 +40,16 @@ export const Login = () => {
 
     return (
         <div className='container'>
-            {/* Outer Row */}
             <div className='row justify-content-center'>
                 <div className='col-xl-10 col-lg-12 col-md-9'>
                     <div className='card o-hidden border-0 shadow-lg my-5'>
                         <div className='card-body p-0'>
-                            {/* Nested Row within Card Body */}
                             <div className='row'>
                                 <div className='col-lg-6 d-none d-lg-block bg-login-image' />
                                 <div className='col-lg-6'>
                                     <div className='p-5'>
                                         <div className='text-center'>
-                                            <h1 className='h4 text-gray-900 mb-4'>Welcome Back!</h1>
+                                            <h1 className='h4 text-gray-900 mb-4'>Chào mừng bạn trở lại!</h1>
                                         </div>
                                         <form className='user' onSubmit={handleSubmit}>
                                             <div className='form-group'>
@@ -63,12 +62,12 @@ export const Login = () => {
                                                     id='exampleInputEmail'
                                                     aria-describedby='emailHelp'
                                                     onChange={handleChange}
-                                                    placeholder='Enter Username...'
+                                                    placeholder='Tên đăng nhập...'
                                                     name='username'
                                                 />
                                                 {submitted && !username && (
                                                     <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>
-                                                        Email is required
+                                                        Tên đăng nhập là bắt buộc
                                                     </div>
                                                 )}
                                             </div>
@@ -80,37 +79,31 @@ export const Login = () => {
                                                         (submitted && !username ? 'is-invalid' : '')
                                                     }
                                                     id='exampleInputPassword'
-                                                    placeholder='Password'
+                                                    placeholder='Mật khẩu...'
                                                     onChange={handleChange}
                                                     name='password'
                                                     autoComplete="on"
                                                 />
                                                 {submitted && !password && (
                                                     <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>
-                                                        Password is required
+                                                        Mật khẩu là bắt buộc
                                                     </div>
                                                 )}
                                             </div>
+                                            <div className='form-group'>
+                                                {submitted && (account.error !== '') ? 
+                                                        <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>{account.error}</div> : ''
+                                                }
+                                            </div>
                                             <div className='form-group' style={{display: "flex", justifyContent: "center"}}>
                                                 <button className='btn btn-primary'>
-                                                    {loading && (
+                                                    {account.loading && (
                                                         <span className='spinner-border spinner-border-sm mr-1'></span>
                                                     )}
-                          Login
-                        </button>
+                                                    Đăng nhập
+                                                </button>
                                             </div>
                                         </form>
-                                        <hr />
-                                        <div className='text-center'>
-                                            <a className='small' href='forgot-password.html'>
-                                                Forgot Password?
-                      </a>
-                                        </div>
-                                        <div className='text-center'>
-                                            <a className='small' href='register.html'>
-                                                Create an Account!
-                      </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

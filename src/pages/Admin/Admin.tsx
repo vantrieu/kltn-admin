@@ -1,9 +1,16 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { GetMyProfile } from '../../store/Account/actions';
 import Footer from './Components/Footer';
 import LeftMenu from './Components/LefMenu';
 import TopNavBar from './Components/TopNavbar';
 
 export const Admin = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(GetMyProfile());
+    }, [dispatch]);
     return (
         <BrowserRouter>
             <LeftMenu />

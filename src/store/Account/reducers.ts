@@ -1,9 +1,19 @@
-import { AccountState, AccountActionTypes, LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOG_OUT } from './types';
+import { 
+    AccountState, 
+    AccountActionTypes, 
+    LOGIN_REQUEST, 
+    LOGIN_SUCCESS, 
+    LOGIN_FAILURE, 
+    LOG_OUT, 
+    LOAD_CURRENT_USER_REQUEST, 
+    LOAD_CURRENT_USER_SUCCESS, 
+    LOAD_CURRENT_USER_FAILURE 
+} from './types';
 
 const initialState: AccountState = {
     user: null,
     loading: false,
-    error: null,
+    error: '',
     accessToken: null,
     refreshToken: null,
     role: null,
@@ -24,7 +34,7 @@ const accountReducer = (
         case LOGIN_SUCCESS: {
             return {
                 ...state,
-                error: null,
+                error: '',
                 loading: false,
                 accessToken: action.payload.accessToken,
                 refreshToken: action.payload.refreshToken,
@@ -44,11 +54,33 @@ const accountReducer = (
                 ...state,
                 user: null,
                 loading: false,
-                error: null,
+                error: '',
                 accessToken: null,
                 refreshToken: null,
                 role: null,
                 expireIn: 0
+            }
+        }
+        case LOAD_CURRENT_USER_REQUEST: {
+            return {
+                ...state,
+                loading: true,
+                error: ''
+            }
+        }
+        case LOAD_CURRENT_USER_SUCCESS: {
+            return {
+                ...state,
+                loading: false,
+                user: action.payload.user,
+                error: ''
+            }
+        }
+        case LOAD_CURRENT_USER_FAILURE: {
+            return {
+                ...state,
+                loading: true,
+                error: action.payload.error
             }
         }
         default:
