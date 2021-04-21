@@ -8,14 +8,14 @@ export interface AuthenticatedUser {
     _id: string;
     first_name: string;
     last_name: string;
-    email: string;
+    username: string;
     avatar: string;
 }
 
 interface LoginRequest {
     type: typeof LOGIN_REQUEST;
     payload: {
-        email: string;
+        username: string;
         password: string;
     };
 }
@@ -23,7 +23,10 @@ interface LoginRequest {
 interface LoginSuccess {
     type: typeof LOGIN_SUCCESS;
     payload: {
-        token: string;
+        accessToken: string;
+        refreshToken: string;
+        role: string;
+        expireIn: number;
     };
 }
 
@@ -42,7 +45,10 @@ export interface AccountState {
     user: AuthenticatedUser | null;
     loading: boolean;
     error: string | null;
-    token: string | null;    
+    accessToken: string | null;
+    refreshToken: string | null;
+    role: string | null;
+    expireIn: number | 0;
 }
 
 export type AccountActionTypes = 

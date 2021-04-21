@@ -7,14 +7,14 @@ import { login, logout } from '../../store/Account/actions';
 
 export const Login = () => {
     const [inputs, setInputs] = useState({
-        email: '',
+        username: '',
         password: '',
     });
     const [submitted, setSubmitted] = useState(false);
 
     const loading = useSelector<AppState>((state) => state.account.loading);
 
-    const { email, password } = inputs;
+    const { username , password } = inputs;
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -31,9 +31,9 @@ export const Login = () => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmitted(true);
-        if (email && password) {
+        if (username && password) {
             const { from }: any = location.state || { from: { pathname: '/' } };
-            dispatch(login(email, password, from));
+            dispatch(login(username, password, from));
         }
     };
 
@@ -55,18 +55,18 @@ export const Login = () => {
                                         <form className='user' onSubmit={handleSubmit}>
                                             <div className='form-group'>
                                                 <input
-                                                    type='email'
+                                                    type='text'
                                                     className={
                                                         'form-control form-control-user ' +
-                                                        (submitted && !email ? 'is-invalid' : '')
+                                                        (submitted && !username ? 'is-invalid' : '')
                                                     }
                                                     id='exampleInputEmail'
                                                     aria-describedby='emailHelp'
                                                     onChange={handleChange}
-                                                    placeholder='Enter Email Address...'
-                                                    name='email'
+                                                    placeholder='Enter Username...'
+                                                    name='username'
                                                 />
-                                                {submitted && !email && (
+                                                {submitted && !username && (
                                                     <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>
                                                         Email is required
                                                     </div>
@@ -77,7 +77,7 @@ export const Login = () => {
                                                     type='password'
                                                     className={
                                                         'form-control form-control-user ' +
-                                                        (submitted && !email ? 'is-invalid' : '')
+                                                        (submitted && !username ? 'is-invalid' : '')
                                                     }
                                                     id='exampleInputPassword'
                                                     placeholder='Password'

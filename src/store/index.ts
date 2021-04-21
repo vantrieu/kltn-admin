@@ -17,8 +17,8 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 export type AppState = ReturnType<typeof rootReducer>;
 
 export default function configureStore() {
-    const middlewares = [thunkMiddleware];
-    const middlewareEnhancer = applyMiddleware(...middlewares);
+    const middleware = [thunkMiddleware];
+    const middlewareEnhancer = applyMiddleware(...middleware);
 
     return createStore(rootReducer, composeEnhancers( middlewareEnhancer));
 }
