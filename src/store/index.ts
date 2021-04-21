@@ -1,10 +1,23 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { accountReducer } from "./Account/reducers";
 import thunkMiddleware from "redux-thunk";
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { setAuthToken } from '../helpers';
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: [
+      'account'
+    ]
+}
 
 const rootReducer = combineReducers({
     account: accountReducer
 });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 declare global{
     interface Window {
@@ -16,9 +29,29 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 
 export type AppState = ReturnType<typeof rootReducer>;
 
-export default function configureStore() {
-    const middleware = [thunkMiddleware];
-    const middlewareEnhancer = applyMiddleware(...middleware);
+const configureStore = () => {
+    const middlewares = [thunkMiddleware];
+    const middlewareEnhancer = applyMiddleware(...middlewares);
 
-    return createStore(rootReducer, composeEnhancers( middlewareEnhancer));
+    return createStore(persistedReducer, composeEnhancers(middlewareEnhancer));
 }
+
+const store = configureStore();
+const persistedStore = persistStore(store);
+
+let currentState = store.getState() as AppState;
+
+store.subscribe(() => {
+  // keep track of the previous and current state to compare changes
+  let previousState = currentState;
+  currentState = store.getState() as AppState;
+  // if the token changes set the value in localStorage and axios headers
+  if (previousState.account.accessToken !== currentState.account.accessToken) {
+    const token = currentState.account.accessToken;
+    if (token) {
+      setAuthToken(token);
+    }
+  }
+});
+
+export { store, persistedStore };
