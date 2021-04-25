@@ -10,7 +10,7 @@ const LefMenu = () => {
                 <div className="sidebar-brand-icon rotate-n-15">
                     <i className="fas fa-laugh-wink" />
                 </div>
-                <div className="sidebar-brand-text mx-3">HEAVEN SHOP</div>
+                <div className="sidebar-brand-text mx-3">MUSIC DISCOVER</div>
             </Link>
             <hr className="sidebar-divider" />
             <div className="sidebar-heading">
