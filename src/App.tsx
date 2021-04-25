@@ -2,7 +2,7 @@ import './styles/sb-admin-2.min.css';
 import './assets/fontawesome-free/css/all.min.css';
 import { Route, Router, Switch } from 'react-router-dom';
 import { PrivateRoute } from './components';
-import { 
+import {
   Login,
   ForgotPassword,
   ResetPassword
@@ -10,23 +10,32 @@ import {
 import { Admin } from './pages/Admin/Admin';
 import { AccountRoute } from './components/AccountRoute';
 import { history } from './helpers';
+import { useSelector } from 'react-redux';
+import { AppState } from './store';
+import { useState } from 'react';
 
 function App() {
+  const [account] = useState(useSelector((state: AppState) => state.account));
+
   return (
     <div className="App" id="wrapper">
       <Router history={history}>
         <Switch>
-          <Route path='/forgot-password'>
-            <ForgotPassword/>
-          </Route>
-          <Route path='/reset-password'>
-            <ResetPassword/>
-          </Route>
+          {account.accessToken === null ?
+            <Route path='/forgot-password'>
+              <ForgotPassword />
+            </Route> : ''
+          }
+          {account.accessToken === null ?
+            <Route path='/reset-password/:token'>
+              <ResetPassword />
+            </Route> : ''
+          }
           <PrivateRoute>
-            <AccountRoute  path='/login'>
+            <AccountRoute path='/login'>
               <Login />
             </AccountRoute>
-            <PrivateRoute  path='/'>
+            <PrivateRoute path='/'>
               <Admin />
             </PrivateRoute>
           </PrivateRoute>

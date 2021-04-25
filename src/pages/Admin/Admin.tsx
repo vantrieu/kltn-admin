@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
+import { NotFound } from '../Account';
 import Footer from './Components/Footer';
 import LeftMenu from './Components/LefMenu';
 import TopNavBar from './Components/TopNavbar';
@@ -26,11 +27,9 @@ export const Admin = () => {
                         <Route exact path='/update-profile'>
                             <EditProfile />
                         </Route>
-                        {/* <Route exact path='/profile/:id' component={EditProduct}>
-                        </Route> */}
-                        {/* <Route exact={true} path=''>
+                        <Route exact path='/*'>
                             <NotFound />
-                        </Route> */}
+                        </Route>
                     </div>
                 </div>
                 <Footer />

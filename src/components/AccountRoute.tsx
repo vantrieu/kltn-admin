@@ -12,7 +12,7 @@ export const AccountRoute = ({ children, ...rest }: RouteProps): JSX.Element => 
         {...rest}
         render={() =>
           account.accessToken ? (
-            <Redirect to={{ pathname: '/admin/home' }} />
+            <Redirect to={{ pathname: '/' }} />
           ) : (
             <Login />
           )

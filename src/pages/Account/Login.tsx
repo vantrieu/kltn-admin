@@ -5,6 +5,7 @@ import { AppState } from '../../store';
 import { useLocation } from 'react-router';
 import { login, logout } from '../../store/Account/actions';
 import { AccountState } from '../../store/Account/types';
+import { Link } from 'react-router-dom';
 
 export const Login = () => {
     const [inputs, setInputs] = useState({
@@ -15,7 +16,7 @@ export const Login = () => {
 
     const account = useSelector<AppState>((state) => state.account) as AccountState;
 
-    const { username , password } = inputs;
+    const { username, password } = inputs;
 
     const dispatch = useDispatch();
     const location = useLocation();
@@ -66,7 +67,7 @@ export const Login = () => {
                                                     name='username'
                                                 />
                                                 {submitted && !username && (
-                                                    <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>
+                                                    <div className='invalid-feedback' style={{ display: "flex", justifyContent: "center" }}>
                                                         Tên đăng nhập là bắt buộc
                                                     </div>
                                                 )}
@@ -85,17 +86,17 @@ export const Login = () => {
                                                     autoComplete="on"
                                                 />
                                                 {submitted && !password && (
-                                                    <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>
+                                                    <div className='invalid-feedback' style={{ display: "flex", justifyContent: "center" }}>
                                                         Mật khẩu là bắt buộc
                                                     </div>
                                                 )}
                                             </div>
                                             <div className='form-group'>
-                                                {submitted && (account.error !== '') ? 
-                                                        <div className='invalid-feedback' style={{display: "flex", justifyContent: "center"}}>{account.error}</div> : ''
+                                                {submitted && (account.error !== '') ?
+                                                    <div className='invalid-feedback' style={{ display: "flex", justifyContent: "center" }}>{account.error}</div> : ''
                                                 }
                                             </div>
-                                            <div className='form-group' style={{display: "flex", justifyContent: "center"}}>
+                                            <div className='form-group' style={{ display: "flex", justifyContent: "center" }}>
                                                 <button className='btn btn-primary'>
                                                     {account.loading && (
                                                         <span className='spinner-border spinner-border-sm mr-1'></span>
@@ -104,6 +105,12 @@ export const Login = () => {
                                                 </button>
                                             </div>
                                         </form>
+                                        <hr />
+                                        <div className="text-center">
+                                            <Link className="small" to='/forgot-password'>
+                                                Forgot Password?
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
