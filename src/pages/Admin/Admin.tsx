@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
 import { NotFound } from '../Account';
 import Footer from './Components/Footer';
@@ -21,15 +21,11 @@ export const Admin = () => {
                 <div id="content">
                     <TopNavBar />
                     <div className="container-fluid">
-                        <Route exact path='/my-profile'>
-                            <ViewProfile />
-                        </Route>
-                        <Route exact path='/update-profile'>
-                            <EditProfile />
-                        </Route>
-                        <Route exact path='/*'>
-                            <NotFound />
-                        </Route>
+                        <Switch>
+                            <Route exact path='/my-profile' component={ViewProfile} />
+                            <Route exact path='/update-profile' component={EditProfile} />/
+                            <Route component={NotFound} />
+                        </Switch>
                     </div>
                 </div>
                 <Footer />
