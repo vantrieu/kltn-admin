@@ -1,6 +1,9 @@
 import { ChangeEvent, FormEvent, Fragment, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { trackTypesServices } from '../../../services/tracktypes.services';
+import { history } from '../../../helpers';
+import { useDispatch } from 'react-redux';
+import { ShowNotify } from '../../../store/Notify/actions';
 
 export const AddEditTrackType = () => {
     const [inputs, setInputs] = useState({
@@ -12,13 +15,17 @@ export const AddEditTrackType = () => {
         const { name, value } = e.target;
         setInputs((inputs) => ({ ...inputs, [name]: value }));
     };
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmitted(true);
         if (typename) {
             const response = await trackTypesServices.CreateTrackType(typename);
-            console.log(response);
+            if(response.data.status === 201){
+                dispatch(ShowNotify('Thêm mới thể loại thành công'));
+                history.goBack();
+            } 
         }
     };
     return (

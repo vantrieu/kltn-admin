@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
 import { logout } from "../../../store/Account/actions";
 import { AuthenticatedUser } from "../../../store/Account/types";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { NotifyState } from "../../../store/Notify/types";
 
 const TopNavbar = () => {
     const user = useSelector<AppState>((state) => state.account.user) as AuthenticatedUser;
+    const nofify = useSelector<AppState>((state) => state.notify) as NotifyState;
     const [isShowProfilemenuDropdown, setIsShowProfilemenuDropdown] = useState(false);
     const dispatch = useDispatch();
+    useEffect(() => {
+        toast(nofify.message);
+    }, [nofify.message])
     return (
         <div>
             <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -35,6 +42,7 @@ const TopNavbar = () => {
                     </li>
                 </ul>
             </nav>
+            <ToastContainer />
         </div>
     )
 }
