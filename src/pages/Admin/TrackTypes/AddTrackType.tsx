@@ -5,7 +5,7 @@ import { history } from '../../../helpers';
 import { useDispatch } from 'react-redux';
 import { ShowNotify } from '../../../store/Notify/actions';
 
-export const AddEditTrackType = () => {
+export const AddTrackType = (props: any) => {
     const [inputs, setInputs] = useState({
         typename: ''
     });

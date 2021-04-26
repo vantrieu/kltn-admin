@@ -10,8 +10,9 @@ import EditProfile from './Profile/EditProfile';
 import ViewProfile from './Profile/ViewProfile';
 import { history } from '../../helpers';
 import { ListUser } from './Users/ListUser';
-import { TrackTypes } from './TrackTypes/TrackTypes';
-import { AddEditTrackType } from './TrackTypes/AddEditTrackType';
+import { ListTrackTypes } from './TrackTypes/ListTrackTypes';
+import { AddTrackType } from './TrackTypes/AddTrackType';
+import { EditTrackType } from './TrackTypes/EditTrackType';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -27,8 +28,9 @@ export const Admin = () => {
                     <div className="container-fluid">
                         <Switch>
                             <Route exact path='/' component={ListUser} />
-                            <Route exact path='/track-types' component={TrackTypes} />
-                            <Route exact path='/add-tracktype' component={AddEditTrackType} />
+                            <Route exact path='/track-types' component={ListTrackTypes} />
+                            <Route exact path='/add-tracktype' component={AddTrackType} />
+                            <Route exact path='/edit-tracktype/:id' component={EditTrackType} />
                             <Route exact path='/my-profile' component={ViewProfile} />
                             <Route exact path='/update-profile' component={EditProfile} />/
                             <Route component={NotFound} />

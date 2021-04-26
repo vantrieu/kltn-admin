@@ -5,6 +5,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { setAuthToken } from '../helpers';
 import { notifyReducer } from "./Notify/reducers";
+import { trackTypesReducer } from "./TrackTypes/reducers";
 
 const persistConfig = {
     key: 'root',
@@ -16,7 +17,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     account: accountReducer,
-    notify: notifyReducer
+    notify: notifyReducer,
+    tracktypes: trackTypesReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
