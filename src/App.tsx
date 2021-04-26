@@ -22,14 +22,10 @@ function App() {
       <Router history={history}>
         <Switch>
           {account.accessToken === null ?
-            <Route path='/forgot-password'>
-              <ForgotPassword />
-            </Route> : ''
+            <Route path='/forgot-password' component={ForgotPassword} /> : ''
           }
           {account.accessToken === null ?
-            <Route path='/reset-password/:token'>
-              <ResetPassword />
-            </Route> : ''
+            <Route path='/reset-password/:token' component={ResetPassword} /> : ''
           }
           <PrivateRoute>
             <AccountRoute path='/login'>

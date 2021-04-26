@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
 import { NotFound } from '../Account';
 import Footer from './Components/Footer';
@@ -8,6 +8,7 @@ import LeftMenu from './Components/LefMenu';
 import TopNavBar from './Components/TopNavbar';
 import EditProfile from './Profile/EditProfile';
 import ViewProfile from './Profile/ViewProfile';
+import { history } from '../../helpers';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export const Admin = () => {
         dispatch(GetMyProfile());
     }, [dispatch]);
     return (
-        <BrowserRouter>
+        <Router history={history}>
             <LeftMenu />
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
@@ -30,6 +31,6 @@ export const Admin = () => {
                 </div>
                 <Footer />
             </div>
-        </BrowserRouter>
+        </Router>
     )
 }

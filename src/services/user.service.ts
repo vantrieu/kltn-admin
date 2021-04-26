@@ -30,8 +30,20 @@ const FotgotPassword = async (email: string): Promise<any> => {
         })
 }
 
+const ResetPassWord = async (password: string, token: string) => {
+    api.defaults.headers.common['x-access-token'] = `${token}`;
+    return await api.post('/accounts/change-password', { password })
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const userService = {
     login,
     GetMyProfile,
-    FotgotPassword
+    FotgotPassword,
+    ResetPassWord
 }
