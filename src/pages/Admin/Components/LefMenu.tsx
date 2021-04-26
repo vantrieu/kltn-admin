@@ -17,15 +17,15 @@ const LefMenu = () => {
                 Quản trị hệ thống
             </div>
             <li className="nav-item">
-                <Link className="nav-link" to='/users'>
+                <Link className="nav-link" to='/'>
                     <i className="fas fa-users" />
                     <span>Người dùng</span>
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/products'>
+                <Link className="nav-link" to='/track-types'>
                     <i className="fas fa-fw fa-table" />
-                    <span>Sản phẩm</span>
+                    <span>Thể loại nhạc</span>
                 </Link>
             </li>
             <li className="nav-item">
