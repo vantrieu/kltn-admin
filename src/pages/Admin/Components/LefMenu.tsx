@@ -29,9 +29,9 @@ const LefMenu = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/categories'>
+                <Link className="nav-link" to='/list-track/limit=20&page=1'>
                     <i className="fab fa-typo3" />
-                    <span>Loại sản phẩm</span>
+                    <span>Bài hát</span>
                 </Link>
             </li>
             <li className="nav-item">
