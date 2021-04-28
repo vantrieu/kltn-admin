@@ -23,6 +23,12 @@ const LefMenu = () => {
                 </Link>
             </li>
             <li className="nav-item">
+                <Link className="nav-link" to='/singer'>
+                    <i className="fas fa-users" />
+                    <span>Ca sĩ</span>
+                </Link>
+            </li>
+            <li className="nav-item">
                 <Link className="nav-link" to='/track-types'>
                     <i className="fas fa-fw fa-table" />
                     <span>Thể loại nhạc</span>

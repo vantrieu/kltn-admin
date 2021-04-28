@@ -14,6 +14,9 @@ import { ListTrackTypes } from './TrackTypes/ListTrackTypes';
 import { AddTrackType } from './TrackTypes/AddTrackType';
 import { EditTrackType } from './TrackTypes/EditTrackType';
 import { ListTrack } from './Tracks/ListTrack';
+import { ListSinger } from './Singers/ListSinger';
+import { AddSinger } from './Singers/AddSinger';
+import { EditSinger } from './Singers/EditSinger';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -25,10 +28,13 @@ export const Admin = () => {
             <LeftMenu />
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <TopNavBar />
+                    <TopNavBar/>
                     <div className="container-fluid">
                         <Switch>
                             <Route exact path='/' component={ListUser} />
+                            <Route exact path='/singer' component={ListSinger} />
+                            <Route exact path='/singer/create' component={AddSinger} />
+                            <Route exact path='/singer/edit/:id' component={EditSinger} />
                             <Route exact path='/track-types' component={ListTrackTypes} />
                             <Route exact path='/add-tracktype' component={AddTrackType} />
                             <Route exact path='/edit-tracktype/:id' component={EditTrackType} />

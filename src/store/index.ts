@@ -7,6 +7,7 @@ import { setAuthToken } from '../helpers';
 import { notifyReducer } from "./Notify/reducers";
 import { trackTypesReducer } from "./TrackTypes/reducers";
 import { trackReducer } from "./Tracks/reducers";
+import { singerReducer } from "./Singers/reducers";
 
 const persistConfig = {
     key: 'root',
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     account: accountReducer,
     notify: notifyReducer,
     tracktypes: trackTypesReducer,
-    tracks: trackReducer
+    tracks: trackReducer,
+    singers: singerReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
