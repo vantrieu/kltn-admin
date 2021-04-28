@@ -1,5 +1,6 @@
 import './styles/sb-admin-2.min.css';
 import './assets/fontawesome-free/css/all.min.css';
+import './styles/style.css'
 import { Route, Router, Switch } from 'react-router-dom';
 import { PrivateRoute } from './components';
 import {

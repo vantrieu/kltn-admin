@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
@@ -7,6 +7,7 @@ import { MetaData, Track } from "../../../store/Tracks/types";
 import Pagination from "react-js-pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { history } from "../../../helpers";
+import Select from 'react-select';
 
 export const ListTrack = (props: any) => {
     const limit = props.match.params.limit || 20;
@@ -23,10 +24,18 @@ export const ListTrack = (props: any) => {
         history.push(`/list-track/limit=${limit}&page=${pageNumber}`);
     }
 
-    const selectHandleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        history.push(`/list-track/limit=${e.target.value}&page=${page}`);
-    }
-    
+    const handleChange = (selectedOption: any) => {
+        history.push(`/list-track/limit=${selectedOption.value}&page=${page}`);
+    };
+
+    const options = [
+        { value: '10', label: '10' },
+        { value: '20', label: '20' },
+        { value: '30', label: '30' },
+        { value: '40', label: '40' },
+        { value: '50', label: '50' }
+    ];
+
     return (
         <Fragment>
             <div className="row">
@@ -48,16 +57,22 @@ export const ListTrack = (props: any) => {
                         <div className="col-sm-12 col-md-6 pl-4">
                             <div className="dataTables_length row">
                                 <label>Hiển thị:&nbsp;</label>
-                                <select name="dataTable_length" className='rounded' aria-controls="dataTable" style={{width: '50px'}} onChange={selectHandleChange}>
+                                {/* <select name="dataTable_length" className='rounded' aria-controls="dataTable" style={{width: '50px'}} onChange={selectHandleChange}>
                                     <option value={20}>20</option>
                                     <option value={30}>30</option>
                                     <option value={40} >40</option>
                                     <option value={50}>50</option>
-                                </select>
+                                </select> */}
+                                <Select
+                                    className='select-weight'
+                                    value={{ value: limit, label: limit }}
+                                    onChange={handleChange}
+                                    options={options}
+                                />
                             </div>
                         </div>
                         <div className="col-sm-12 col-md-6">
-                            <div id="dataTable_filter" style={{float: 'right'}}>
+                            <div id="dataTable_filter" style={{ float: 'right' }}>
                                 <label>Tìm kiếm:&nbsp;</label>
                                 <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" />
 
