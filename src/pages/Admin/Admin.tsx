@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
 import { NotFound } from '../Account';
-import Footer from './Components/Footer';
+// import Footer from './Components/Footer';
 import LeftMenu from './Components/LefMenu';
 import TopNavBar from './Components/TopNavbar';
 import EditProfile from './Profile/EditProfile';
@@ -47,7 +47,7 @@ export const Admin = () => {
                         </Switch>
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </Router>
     )

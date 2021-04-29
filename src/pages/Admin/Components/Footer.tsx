@@ -1,13 +1,12 @@
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-
 const Footer = () => {
     return (
-        <AudioPlayer
-            autoPlay
-            src='http://localhost:3000/tracks/play/60878d950486a83320582b37'
-            onPlay={e => console.log("onPlay")}
-        />
+        <footer className="sticky-footer bg-white">
+            <div className="container my-auto">
+                <div className="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2021</span>
+                </div>
+            </div>
+        </footer>
     )
 }
 

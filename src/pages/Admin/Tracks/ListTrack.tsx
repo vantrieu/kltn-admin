@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
@@ -8,12 +8,15 @@ import Pagination from "react-js-pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { history } from "../../../helpers";
 import Select from 'react-select';
+import { PlayMusic } from "../Components/PlayMusic";
 
 export const ListTrack = (props: any) => {
     const limit = props.match.params.limit || 20;
     const page = props.match.params.page || 1;
     const tracks = useSelector<AppState>((state) => state.tracks.tracks) as Array<Track>;
     const metaData = useSelector<AppState>((state) => state.tracks.metaData) as MetaData;
+
+    const [index, setIndex] = useState<number>(0);
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,6 +32,7 @@ export const ListTrack = (props: any) => {
     };
 
     const options = [
+        { value: '3', label: '3' },
         { value: '10', label: '10' },
         { value: '20', label: '20' },
         { value: '30', label: '30' },
@@ -103,7 +107,7 @@ export const ListTrack = (props: any) => {
                                                     <i className="far fa-trash-alt" />
                                                     &nbsp; Xóa
                                                 </button>
-                                                <button className='btn btn-primary ml-1'>
+                                                <button className='btn btn-primary ml-1' onClick={() => setIndex(index)}>
                                                     <i className="fas fa-play-circle" />
                                                     &nbsp; Nghe thử
                                                 </button>
@@ -127,6 +131,7 @@ export const ListTrack = (props: any) => {
                     />
                 </div>
             </div>
+            <PlayMusic tracks={tracks} index={index} setIndex={setIndex}/>
         </Fragment>
     )
 }
