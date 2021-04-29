@@ -1,7 +1,7 @@
 import { api } from '../helpers/index';
 
 const GetListSinger = async (): Promise<any> => {
-    return await api.get('/singers')
+    return await api.get('/singers/get-list')
         .then(response => {
             return response;
         })
@@ -30,8 +30,19 @@ const UpdateSinger = async (id: string, body: FormData):Promise<any> => {
         })
 }
 
+const GetListOption = async (): Promise<any> => {
+    return await api.get('/singers/list-option')
+        .then(response => {
+            return response.data.items;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const singerService = {
     GetListSinger,
     CreateSinger,
-    UpdateSinger
+    UpdateSinger,
+    GetListOption
 }

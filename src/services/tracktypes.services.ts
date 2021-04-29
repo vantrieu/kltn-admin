@@ -41,9 +41,20 @@ const DeleteTrackType = async (id: string): Promise<any> => {
         })
 }
 
+const GetListOption = async (): Promise<any> => {
+    return await api.get('/tracktypes/option')
+        .then(response => {
+            return response.data.items;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const trackTypesServices = {
     CreateTrackType,
     GetListTrackType,
     EditTrackType,
-    DeleteTrackType
+    DeleteTrackType,
+    GetListOption
 }

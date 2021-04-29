@@ -11,6 +11,19 @@ export interface Track {
     background: string;
     tracklink: string;
     total: number;
+    singer: Singer;
+    tracktype: TrackType
+}
+
+interface Singer {
+    _id: string;
+    name: string;
+    avatar: string;
+}
+
+interface TrackType {
+    _id: string;
+    typename: string;
 }
 
 export interface MetaData {
@@ -58,7 +71,7 @@ interface DeleteTrack {
     }
 }
 
-export type TracksActionTypes = 
+export type TracksActionTypes =
     | LoadTrackRequest
     | LoadTrackSuccess
     | LoadTrackFailure

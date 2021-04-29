@@ -42,7 +42,7 @@ export const ListTrack = (props: any) => {
                 <div className="col-6">
                 </div>
                 <div className="col-6 text-right mb-2">
-                    <Link className="btn btn-success" to='/add-tracktype'>
+                    <Link className="btn btn-success" to='/add-track'>
                         <i className="fas fa-plus" />
                         &nbsp; Thêm mới bài hát
                     </Link>
@@ -57,12 +57,6 @@ export const ListTrack = (props: any) => {
                         <div className="col-sm-12 col-md-6 pl-4">
                             <div className="dataTables_length row">
                                 <label>Hiển thị:&nbsp;</label>
-                                {/* <select name="dataTable_length" className='rounded' aria-controls="dataTable" style={{width: '50px'}} onChange={selectHandleChange}>
-                                    <option value={20}>20</option>
-                                    <option value={30}>30</option>
-                                    <option value={40} >40</option>
-                                    <option value={50}>50</option>
-                                </select> */}
                                 <Select
                                     className='select-weight'
                                     value={{ value: limit, label: limit }}
@@ -83,10 +77,11 @@ export const ListTrack = (props: any) => {
                         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
                             <thead>
                                 <tr>
-                                    <th>Mã bài hát</th>
                                     <th>Tên bài hát</th>
                                     <th>Mô tả</th>
-                                    <th>Tổng số lượt nghe</th>
+                                    <th>Ca sĩ</th>
+                                    <th>Thể loại</th>
+                                    <th>Lượt nghe</th>
                                     <th>Hành động</th>
                                 </tr>
                             </thead>
@@ -94,9 +89,10 @@ export const ListTrack = (props: any) => {
                                 {tracks.map((item, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{item._id}</td>
                                             <td>{item.trackname}</td>
                                             <td>{item.description}</td>
+                                            <td>{item.singer.name}</td>
+                                            <td>{item.tracktype.typename}</td>
                                             <td>{item.total}</td>
                                             <td>
                                                 <Link className="btn btn-success mr-1" to={'/edit-tracktype/' + item._id.toString()}>

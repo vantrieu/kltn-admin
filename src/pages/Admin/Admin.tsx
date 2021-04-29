@@ -17,6 +17,7 @@ import { ListTrack } from './Tracks/ListTrack';
 import { ListSinger } from './Singers/ListSinger';
 import { AddSinger } from './Singers/AddSinger';
 import { EditSinger } from './Singers/EditSinger';
+import { AddTrack } from './Tracks/AddTrack';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -39,6 +40,7 @@ export const Admin = () => {
                             <Route exact path='/add-tracktype' component={AddTrackType} />
                             <Route exact path='/edit-tracktype/:id' component={EditTrackType} />
                             <Route exact path='/list-track/limit=:limit&page=:page' component={ListTrack} />
+                            <Route exact path='/add-track' component={AddTrack} />
                             <Route exact path='/my-profile' component={ViewProfile} />
                             <Route exact path='/update-profile' component={EditProfile} />/
                             <Route component={NotFound} />
