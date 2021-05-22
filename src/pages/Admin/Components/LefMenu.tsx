@@ -41,9 +41,9 @@ const LefMenu = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/orders'>
+                <Link className="nav-link" to='/playlists'>
                     <i className="fab fa-jedi-order" />
-                    <span>Đơn hàng</span>
+                    <span>Playlist</span>
                 </Link>
             </li>
             <hr className="sidebar-divider d-none d-md-block" />
