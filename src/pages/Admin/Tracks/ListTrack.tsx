@@ -2,13 +2,16 @@ import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
-import { GetListTrack } from "../../../store/Tracks/actions";
+import { DeleteTrack, GetListTrack } from "../../../store/Tracks/actions";
 import { MetaData, Track } from "../../../store/Tracks/types";
 import Pagination from "react-js-pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { history } from "../../../helpers";
 import Select from 'react-select';
 import { PlayMusic } from "../Components/PlayMusic";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { ShowNotify } from "../../../store/Notify/actions";
 
 export const ListTrack = (props: any) => {
     const limit = props.match.params.limit || 20;
@@ -30,6 +33,26 @@ export const ListTrack = (props: any) => {
     const handleChange = (selectedOption: any) => {
         history.push(`/list-track/limit=${selectedOption.value}&page=${page}`);
     };
+
+    const handleDelete = (model: any) => {
+        confirmAlert({
+            title: 'Warning!',
+            message: `Bạn chắc chắn xóa thể loại: ${model.typename}`,
+            buttons: [
+                {
+                    label: 'Xóa',
+                    onClick: () => {
+                        dispatch(DeleteTrack(model._id));
+                        dispatch(ShowNotify(`Đã xóa thể loại: ${model.typename}!`));
+                    }
+                },
+                {
+                    label: 'Hủy',
+                    onClick: () => dispatch(ShowNotify('Đã hủy hành động xóa!'))
+                }
+            ]
+        });
+    }
 
     const options = [
         { value: '3', label: '3' },
@@ -99,11 +122,7 @@ export const ListTrack = (props: any) => {
                                             <td>{item.tracktype.typename}</td>
                                             <td>{item.total}</td>
                                             <td>
-                                                <Link className="btn btn-success mr-1" to={'/edit-tracktype/' + item._id.toString()}>
-                                                    <i className="fas fa-edit" />
-                                                    &nbsp; Cập nhật
-                                                </Link>
-                                                <button className="btn btn-danger ml-1 mr-1" >
+                                                <button className="btn btn-danger ml-1 mr-1" onClick={() => handleDelete(item)} >
                                                     <i className="far fa-trash-alt" />
                                                     &nbsp; Xóa
                                                 </button>

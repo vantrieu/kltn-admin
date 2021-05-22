@@ -30,7 +30,7 @@ export const PlayMusic = (props: any) => {
                 onClickNext = {handleNext}
                 onEnded = {handleNext}
                 onClickPrevious = {handlePrevious}
-                src={`http://localhost:3000${tracks[index]?.tracklink}`}
+                src={`${process.env.REACT_APP_API_URL}${tracks[index]?.tracklink}`}
             />
         </div>
     )
