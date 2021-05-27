@@ -38,7 +38,7 @@ const Playlists = (props: any) => {
                 <div className="col-6">
                 </div>
                 <div className="col-6 text-right mb-2">
-                    <Link className="btn btn-success" to='/add-track'>
+                    <Link className="btn btn-success" to='/create-playlist'>
                         <i className="fas fa-plus" />
                         &nbsp; Tạo mới playlist
                     </Link>
@@ -49,6 +49,15 @@ const Playlists = (props: any) => {
                     <h6 className="m-0 font-weight-bold text-primary">Danh sách playlist</h6>
                 </div>
                 <div className="card-body">
+                <div className="form-group row">
+                        <div className="col-sm-12 col-md-6">
+                            <div id="dataTable_filter" style={{ float: 'right' }}>
+                                <label>Tìm kiếm:&nbsp;</label>
+                                <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" />
+
+                            </div>
+                        </div>
+                    </div>
                     <div className="table-responsive">
                         <table className="table table-bordered" id="dataTable" width="100%" cellSpacing={0}>
                             <thead>

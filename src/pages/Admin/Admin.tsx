@@ -18,6 +18,7 @@ import { AddSinger } from './Singers/AddSinger';
 import { EditSinger } from './Singers/EditSinger';
 import { AddTrack } from './Tracks/AddTrack';
 import Playlists from './Playlist/Playlists';
+import CreatePlaylist from './Playlist/CreatePlaylist';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ export const Admin = () => {
                             <Route exact path='/my-profile' component={ViewProfile} />
                             <Route exact path='/update-profile' component={EditProfile} />
                             <Route exact path='/playlists' component={Playlists} />
+                            <Route exact path='/create-playlist' component={CreatePlaylist} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

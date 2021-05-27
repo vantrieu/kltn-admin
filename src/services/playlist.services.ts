@@ -13,6 +13,17 @@ const GetListPlaylist = async (limit: number, page: number): Promise<any> => {
         })
 }
 
+const CreatePlayList = async (body: FormData): Promise<any> => {
+    return await api.post('/playlists/create-playlist', body)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const playlistsServices = {
-    GetListPlaylist
+    GetListPlaylist,
+    CreatePlayList
 }
