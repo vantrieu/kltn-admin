@@ -1,6 +1,14 @@
 import { Fragment } from 'react'
+import { playlistsServices } from '../../../services/playlist.services';
 
 const TrackItemAddPlaylist = (props: any) => {
+    const handleAddTrackToPlaylist = async (track_id: string) => {
+        const response = await playlistsServices.AddTrackToPlaylist(props.id, track_id);
+        if (response.status === 200) {
+            props.setReRender(!props.reRender);
+        }
+    };
+
     return (
         <Fragment>
             <div className="row">
@@ -16,8 +24,8 @@ const TrackItemAddPlaylist = (props: any) => {
                     <label style={{ color: 'black', fontSize: '18px', marginLeft: '40px' }}>
                         {props.track.singer.name}
                     </label>
-                    <button className='btn btn-success' style={{ float: 'right', marginTop: '6px' }}>
-                    <i className="fas fa-plus" />&nbsp;Thêm vào playlist
+                    <button className='btn btn-success' style={{ float: 'right', marginTop: '6px' }} onClick={() => handleAddTrackToPlaylist(props.track._id)}>
+                        <i className="fas fa-plus" />&nbsp;Thêm vào playlist
                     </button>
                 </div>
             </div>

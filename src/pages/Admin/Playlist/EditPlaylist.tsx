@@ -22,6 +22,7 @@ const EditPlaylist = (props: any) => {
     const { id } = props.match.params;
     const [page, setPage] = useState<number>(1);
     const [keyWord, setKeyWord] = useState<string>('');
+    const [reRender, setReRender] = useState<boolean>(false)
     const listTrack = useSelector<AppState>((state) => state.tracks.tracks) as Array<Track>;
     const metaData = useSelector<AppState>((state) => state.tracks.metaData) as MetaData;
 
@@ -33,7 +34,7 @@ const EditPlaylist = (props: any) => {
         }
         fetchData();
         dispatch(GetListTrack(20, page, keyWord));
-    }, [dispatch, id, keyWord, page]);
+    }, [dispatch, id, keyWord, page, reRender]);
 
     const handlePageChange = (pageNumber: number) => {
         setPage(pageNumber);
@@ -44,7 +45,6 @@ const EditPlaylist = (props: any) => {
         setKeyWord(value);
     };
 
-    console.log(listTrack)
     return (
         <Fragment>
             <div className="row">
@@ -77,7 +77,7 @@ const EditPlaylist = (props: any) => {
                     </div>
                     <div style={{ width: '100%', height: '730px', overflowY: 'scroll', overflowX: 'hidden', paddingTop: '10px' }}>
                         {listTrack.map((track, index) => {
-                            return <TrackItemAddPlaylist key={index} track={track} id={playlist._id} />
+                            return <TrackItemAddPlaylist key={index} track={track} id={playlist._id} reRender={reRender} setReRender={setReRender} />
                         })}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>

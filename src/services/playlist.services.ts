@@ -33,8 +33,23 @@ const GetPlaylistById = async (id: string): Promise<any> => {
         })
 }
 
+const AddTrackToPlaylist = async (id: string, track_id: string): Promise<any> => {
+    let body = {
+        playlist_id: id,
+        track_ids: [track_id]
+    };
+    return api.post(`/playlists/add-track`, body)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const playlistsServices = {
     GetListPlaylist,
     CreatePlayList,
-    GetPlaylistById
+    GetPlaylistById,
+    AddTrackToPlaylist
 }
