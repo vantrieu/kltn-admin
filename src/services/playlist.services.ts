@@ -3,8 +3,8 @@ import { api } from '../helpers/index';
 
 
 
-const GetListPlaylist = async (limit: number, page: number): Promise<any> => {
-    return await api.get(`/playlists?limit=${limit}&page=${page}`)
+const GetListPlaylist = async (limit: number, page: number, keyWord: String): Promise<any> => {
+    return await api.get(`/playlists?limit=${limit}&page=${page}&keyword=${keyWord}`)
         .then(response => {
             return response;
         })

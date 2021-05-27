@@ -1,36 +1,36 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Fragment, useEffect, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
-import { DeleteTrack, GetListTrack } from "../../../store/Tracks/actions";
-import { MetaData, Track } from "../../../store/Tracks/types";
+import { MetaData } from "../../../store/Tracks/types";
 import Pagination from "react-js-pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { history } from "../../../helpers";
-import Select from 'react-select';
-import { PlayMusic } from "../Components/PlayMusic";
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import { ShowNotify } from "../../../store/Notify/actions";
 import { GetListPlaylist } from "../../../store/Playlist/actions";
 import { Playlist } from "../../../store/Playlist/types";
 import moment from "moment";
 
 const Playlists = (props: any) => {
     const playlists = useSelector<AppState>((state) => state.playlists.playlists) as Array<Playlist>;
-    const metaData = useSelector<AppState>((state) => state.tracks.metaData) as MetaData;
+    const metaData = useSelector<AppState>((state) => state.playlists.metaData) as MetaData;
+    const [keyWord, setKeyWord] = useState<String>('');
+    const [page, setPage] = useState<number>(1);
 
     const [index, setIndex] = useState<number>(0);
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(GetListPlaylist(20, 1));
-    }, [dispatch])
+        dispatch(GetListPlaylist(20, page, keyWord));
+    }, [dispatch, keyWord, page])
 
     const handlePageChange = (pageNumber: number) => {
-        dispatch(GetListPlaylist(20, pageNumber));
+        setPage(pageNumber);
     }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setKeyWord(value);
+    };
 
     return (
         <Fragment>
@@ -50,11 +50,12 @@ const Playlists = (props: any) => {
                 </div>
                 <div className="card-body">
                 <div className="form-group row">
+                        <div className="col-sm-12 col-md-6 pl-4">
+                        </div>
                         <div className="col-sm-12 col-md-6">
                             <div id="dataTable_filter" style={{ float: 'right' }}>
                                 <label>Tìm kiếm:&nbsp;</label>
-                                <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" />
-
+                                <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" onChange={handleChange} />
                             </div>
                         </div>
                     </div>
@@ -70,12 +71,12 @@ const Playlists = (props: any) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {playlists.map((item, index) => {
+                                {playlists?.map((item, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>{item.playlistname}</td>
                                             <td>
-                                                <img style={{width: '150px'}} src={process.env.REACT_APP_API_URL + item.background} alt={item.playlistname} />
+                                                <img style={{ width: '150px' }} src={process.env.REACT_APP_API_URL + item.background} alt={item.playlistname} />
                                             </td>
                                             <td>{item.description}</td>
                                             <td>{moment(item.createdAt).format('DD/MM/YYYY')}</td>
@@ -100,9 +101,9 @@ const Playlists = (props: any) => {
                     <Pagination
                         itemClass="page-item"
                         linkClass="page-link"
-                        activePage={Number(metaData?.prevPage || 1)}
-                        itemsCountPerPage={Number(metaData?.limit)}
-                        totalItemsCount={metaData?.totalDocs || 0}
+                        activePage={metaData?.page}
+                        itemsCountPerPage={metaData?.limit}
+                        totalItemsCount={metaData?.totalDocs | 0}
                         pageRangeDisplayed={5}
                         onChange={handlePageChange}
                     />

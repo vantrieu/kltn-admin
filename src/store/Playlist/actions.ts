@@ -7,14 +7,14 @@ import {
 } from './types';
 import { Dispatch } from "redux";
 
-export const GetListPlaylist = (limit: number, page: number) => {
+export const GetListPlaylist = (limit: number, page: number, keyWord: String) => {
     return async (dispatch: Dispatch<PlaylistsActionTypes>) => {
         dispatch({
             type: LOAD_PLAYLIST_REQUEST
         });
 
         try {
-            const response = await playlistsServices.GetListPlaylist(limit, page);
+            const response = await playlistsServices.GetListPlaylist(limit, page, keyWord);
             dispatch({
                 type: LOAD_PLAYLIST_SUCCESS,
                 payload: {
