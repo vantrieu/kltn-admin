@@ -8,14 +8,14 @@ import {
     TracksActionTypes
 } from "./types";
 
-export const GetListTrack = (limit: number, page: number) => {
+export const GetListTrack = (limit: number, page: number, keyWord: string) => {
     return async (dispatch: Dispatch<TracksActionTypes>) => {
         dispatch({
             type: LOAD_TRACK_REQUEST
         });
 
         try {
-            const response = await trackService.GetListTrack(limit, page);
+            const response = await trackService.GetListTrack(limit, page, keyWord);
             dispatch({
                 type: LOAD_TRACK_SUCCESS,
                 payload: {

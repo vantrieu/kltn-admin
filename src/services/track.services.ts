@@ -10,8 +10,9 @@ const CreateTrack = async (body: FormData): Promise<any> => {
         })
 }
 
-const GetListTrack = async (limit: number, page: number): Promise<any> => {
-    return await api.get(`/tracks/list-music?limit=${limit}&page=${page}`)
+const GetListTrack = async (limit: number, page: number, keyWord: string): Promise<any> => {
+    keyWord = (keyWord === '' || keyWord.length === 0) ? `` :  `&keyword=${keyWord}`;
+    return await api.get(`/tracks/list-music?limit=${limit}&page=${page}${keyWord}`)
         .then(response => {
             return response;
         })

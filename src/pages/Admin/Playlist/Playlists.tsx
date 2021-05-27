@@ -85,10 +85,10 @@ const Playlists = (props: any) => {
                                                     <i className="far fa-trash-alt" />
                                                     &nbsp; Xóa
                                                 </button>
-                                                <button className='btn btn-primary ml-1' onClick={() => setIndex(index)}>
+                                                <Link className='btn btn-primary ml-1' to={`/edit-playlist/${item._id}`}>
                                                     <i className="fas fa-play-circle" />
-                                                    &nbsp; Nghe thử
-                                                </button>
+                                                    &nbsp; Chỉnh sửa
+                                                </Link>
                                             </td>
                                         </tr>
                                     )

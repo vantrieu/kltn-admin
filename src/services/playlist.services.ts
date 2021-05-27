@@ -23,7 +23,18 @@ const CreatePlayList = async (body: FormData): Promise<any> => {
         })
 }
 
+const GetPlaylistById = async (id: string): Promise<any> => {
+    return api.get(`/playlists/detail/${id}`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const playlistsServices = {
     GetListPlaylist,
-    CreatePlayList
+    CreatePlayList,
+    GetPlaylistById
 }

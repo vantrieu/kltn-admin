@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
@@ -15,16 +15,17 @@ import { ShowNotify } from "../../../store/Notify/actions";
 
 export const ListTrack = (props: any) => {
     const limit = props.match.params.limit || 20;
-    const page = props.match.params.page || 1;
+    const [page] = useState<number>(props.match.params.page || 1);
     const tracks = useSelector<AppState>((state) => state.tracks.tracks) as Array<Track>;
     const metaData = useSelector<AppState>((state) => state.tracks.metaData) as MetaData;
 
     const [index, setIndex] = useState<number>(0);
+    const [keyWord, setKeyWord] = useState<string>('');
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(GetListTrack(limit, page));
-    }, [dispatch, limit, page])
+        dispatch(GetListTrack(limit, page, keyWord));
+    }, [dispatch, limit, page, keyWord])
 
     const handlePageChange = (pageNumber: number) => {
         history.push(`/list-track/limit=${limit}&page=${pageNumber}`);
@@ -32,6 +33,11 @@ export const ListTrack = (props: any) => {
 
     const handleChange = (selectedOption: any) => {
         history.push(`/list-track/limit=${selectedOption.value}&page=${page}`);
+    };
+
+    const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setKeyWord(value);
     };
 
     const handleDelete = (model: any) => {
@@ -95,8 +101,7 @@ export const ListTrack = (props: any) => {
                         <div className="col-sm-12 col-md-6">
                             <div id="dataTable_filter" style={{ float: 'right' }}>
                                 <label>Tìm kiếm:&nbsp;</label>
-                                <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" />
-
+                                <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" onChange={handleChangeKeyword} />
                             </div>
                         </div>
                     </div>
@@ -150,7 +155,7 @@ export const ListTrack = (props: any) => {
                     />
                 </div>
             </div>
-            <PlayMusic tracks={tracks} index={index} setIndex={setIndex}/>
+            <PlayMusic tracks={tracks} index={index} setIndex={setIndex} />
         </Fragment>
     )
 }
