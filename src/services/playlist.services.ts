@@ -47,9 +47,21 @@ const AddTrackToPlaylist = async (id: string, track_id: string): Promise<any> =>
         })
 }
 
+const GetOptionTrack = async (id: number, page: number, keyWord: String): Promise<any> => {
+    keyWord = keyWord.length === 0 ? '' : `&keyword=${keyWord}`;
+    return await api.get(`/tracks/option-music/${id}?limit=25&page=${page}${keyWord}`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const playlistsServices = {
     GetListPlaylist,
     CreatePlayList,
     GetPlaylistById,
-    AddTrackToPlaylist
+    AddTrackToPlaylist,
+    GetOptionTrack
 }

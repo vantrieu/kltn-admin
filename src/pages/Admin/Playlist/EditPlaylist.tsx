@@ -1,9 +1,7 @@
 import { ChangeEvent, Fragment, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { playlistsServices } from '../../../services/playlist.services';
-import { AppState } from '../../../store';
 import { Playlist } from '../../../store/Playlist/types';
-import { GetListTrack } from '../../../store/Tracks/actions';
 import { MetaData, Track } from '../../../store/Tracks/types';
 import TrackItem from '../Components/TrackItem';
 import Pagination from "react-js-pagination";
@@ -23,17 +21,30 @@ const EditPlaylist = (props: any) => {
     const [page, setPage] = useState<number>(1);
     const [keyWord, setKeyWord] = useState<string>('');
     const [reRender, setReRender] = useState<boolean>(false)
-    const listTrack = useSelector<AppState>((state) => state.tracks.tracks) as Array<Track>;
-    const metaData = useSelector<AppState>((state) => state.tracks.metaData) as MetaData;
+    const [listTrack, setListTrack] = useState<Array<Track>>([]);
+    const [metaData, setMetaData] = useState<MetaData>({
+        totalDocs: 0,
+        limit: 25,
+        totalPages: 1,
+        page: 1,
+        pagingCounter: 1,
+        hasPrevPage: false,
+        hasNextPage: false,
+        prevPage: 0,
+        nextPage: 0,
+    });
 
     const dispatch = useDispatch();
     useEffect(() => {
         async function fetchData() {
             let response = await playlistsServices.GetPlaylistById(id);
             setPlaylist(response.data.items);
+
+            let result = await playlistsServices.GetOptionTrack(id, page, keyWord);
+            setListTrack(result.data.items);
+            setMetaData(result.data.meta)
         }
         fetchData();
-        dispatch(GetListTrack(20, page, keyWord));
     }, [dispatch, id, keyWord, page, reRender]);
 
     const handlePageChange = (pageNumber: number) => {
@@ -76,7 +87,7 @@ const EditPlaylist = (props: any) => {
                         <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" onChange={handleChange} />
                     </div>
                     <div style={{ width: '100%', height: '730px', overflowY: 'scroll', overflowX: 'hidden', paddingTop: '10px' }}>
-                        {listTrack.map((track, index) => {
+                        {listTrack?.map((track, index) => {
                             return <TrackItemAddPlaylist key={index} track={track} id={playlist._id} reRender={reRender} setReRender={setReRender} />
                         })}
                     </div>
