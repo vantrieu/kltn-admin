@@ -77,31 +77,41 @@ const EditPlaylist = (props: any) => {
                     <hr />
                     <div style={{ width: '100%', height: '500px', overflowY: 'scroll', overflowX: 'hidden', paddingTop: '10px' }}>
                         {playlist.tracks?.map((track, index) => {
-                            return <TrackItem key={index} track={track} id={playlist._id} />
+                            return <TrackItem
+                                key={index}
+                                track={track}
+                                id={playlist._id} 
+                                reRender={reRender}
+                                setReRender={setReRender} />
                         })}
                     </div>
                 </div>
                 <div className="col-6 card shadow">
-                    <div id="dataTable_filter" style={{margin: '10px 10px 5px auto', color: 'black'}}>
+                    <div id="dataTable_filter" style={{ margin: '10px 10px 5px auto', color: 'black' }}>
                         <label>Tìm kiếm:&nbsp;</label>
                         <input type="search" className='border' placeholder='Tên bài hát' aria-controls="dataTable" onChange={handleChange} />
                     </div>
                     <div style={{ width: '100%', height: '730px', overflowY: 'scroll', overflowX: 'hidden', paddingTop: '10px' }}>
                         {listTrack?.map((track, index) => {
-                            return <TrackItemAddPlaylist key={index} track={track} id={playlist._id} reRender={reRender} setReRender={setReRender} />
+                            return <TrackItemAddPlaylist
+                                key={index}
+                                track={track}
+                                id={playlist._id}
+                                reRender={reRender}
+                                setReRender={setReRender} />
                         })}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Pagination
-                        itemClass="page-item"
-                        linkClass="page-link"
-                        activePage={metaData?.page}
-                        itemsCountPerPage={metaData?.limit}
-                        totalItemsCount={metaData?.totalDocs | 0}
-                        pageRangeDisplayed={5}
-                        onChange={handlePageChange}
-                    />
-                </div>
+                        <Pagination
+                            itemClass="page-item"
+                            linkClass="page-link"
+                            activePage={metaData?.page}
+                            itemsCountPerPage={metaData?.limit}
+                            totalItemsCount={metaData?.totalDocs | 0}
+                            pageRangeDisplayed={5}
+                            onChange={handlePageChange}
+                        />
+                    </div>
                 </div>
             </div>
         </Fragment>

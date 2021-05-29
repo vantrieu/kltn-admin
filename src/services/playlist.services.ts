@@ -58,10 +58,21 @@ const GetOptionTrack = async (id: number, page: number, keyWord: String): Promis
         })
 }
 
+const RemoveTrack = async (playlist_id: string, track_id: string): Promise<any> => {
+    return await api.post('/playlists/remove-track', { playlist_id, track_id })
+    .then(response => {
+        return response;
+    })
+    .catch(error => {
+        return Promise.reject(error);
+    })
+}
+
 export const playlistsServices = {
     GetListPlaylist,
     CreatePlayList,
     GetPlaylistById,
     AddTrackToPlaylist,
-    GetOptionTrack
+    GetOptionTrack,
+    RemoveTrack
 }
