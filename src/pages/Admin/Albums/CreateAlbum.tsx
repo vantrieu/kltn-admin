@@ -1,10 +1,9 @@
 import { ChangeEvent, FormEvent, Fragment, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { playlistsServices } from '../../../services/playlist.services';
 import { ShowNotify } from '../../../store/Notify/actions';
 import { history } from '../../../helpers';
-import { singerService } from '../../../services';
+import { albumsServices, singerService } from '../../../services';
 import Select from 'react-select';
 
 const CreateAlbum = () => {
@@ -57,8 +56,11 @@ const CreateAlbum = () => {
             const formDataSubmit = formData;
             formDataSubmit.append('albumname', albumname);
             formDataSubmit.append('description', description);
-            const response = await playlistsServices.CreatePlayList(formDataSubmit);
-            if(response.data.status === 200){
+            singer.forEach((element: any) => {
+                formDataSubmit.append('singers', element.value)
+            });
+            const response = await albumsServices.CreateAlbum(formDataSubmit);
+            if(response.data.status === 201){
                 dispatch(ShowNotify('Tạo mới album thành công!'));
                 history.goBack();
             } 
