@@ -46,6 +46,12 @@ const LefMenu = () => {
                     <span>Playlist</span>
                 </Link>
             </li>
+            <li className="nav-item">
+                <Link className="nav-link" to='/playlists'>
+                    <i className="fas fa-compact-disc" />
+                    <span>Album</span>
+                </Link>
+            </li>
             <hr className="sidebar-divider d-none d-md-block" />
             <div className="text-center d-none d-md-inline" onClick={() => setToggled(!toggled)}>
                 <button className="rounded-circle border-0" id="sidebarToggle" />

@@ -20,6 +20,7 @@ import { AddTrack } from './Tracks/AddTrack';
 import Playlists from './Playlist/Playlists';
 import CreatePlaylist from './Playlist/CreatePlaylist';
 import EditPlaylist from './Playlist/EditPlaylist';
+import CreateAlbum from './Albums/CreateAlbum';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -31,28 +32,58 @@ export const Admin = () => {
             <LeftMenu />
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
-                    <TopNavBar/>
+                    <TopNavBar />
                     <div className="container-fluid">
                         <Switch>
-                            <Route exact path='/' component={ListUser} />
-                            <Route exact path='/singer' component={ListSinger} />
-                            <Route exact path='/singer/create' component={AddSinger} />
-                            <Route exact path='/singer/edit/:id' component={EditSinger} />
-                            <Route exact path='/track-types' component={ListTrackTypes} />
-                            <Route exact path='/add-tracktype' component={AddTrackType} />
-                            <Route exact path='/edit-tracktype/:id' component={EditTrackType} />
-                            <Route exact path='/list-track/limit=:limit&page=:page' component={ListTrack} />
-                            <Route exact path='/add-track' component={AddTrack} />
-                            <Route exact path='/my-profile' component={ViewProfile} />
-                            <Route exact path='/update-profile' component={EditProfile} />
-                            <Route exact path='/playlists' component={Playlists} />
-                            <Route exact path='/create-playlist' component={CreatePlaylist} />
-                            <Route exact path='/edit-playlist/:id' component={EditPlaylist} />
+                            <Route
+                                exact path='/'
+                                component={ListUser} />
+                            <Route
+                                exact path='/singer'
+                                component={ListSinger} />
+                            <Route
+                                exact path='/singer/create'
+                                component={AddSinger} />
+                            <Route
+                                exact path='/singer/edit/:id'
+                                component={EditSinger} />
+                            <Route
+                                exact path='/track-types'
+                                component={ListTrackTypes} />
+                            <Route
+                                exact path='/add-tracktype'
+                                component={AddTrackType} />
+                            <Route
+                                exact path='/edit-tracktype/:id'
+                                component={EditTrackType} />
+                            <Route
+                                exact path='/list-track/limit=:limit&page=:page'
+                                component={ListTrack} />
+                            <Route
+                                exact path='/add-track'
+                                component={AddTrack} />
+                            <Route
+                                exact path='/my-profile'
+                                component={ViewProfile} />
+                            <Route
+                                exact path='/update-profile'
+                                component={EditProfile} />
+                            <Route
+                                exact path='/playlists'
+                                component={Playlists} />
+                            <Route
+                                exact path='/create-playlist'
+                                component={CreatePlaylist} />
+                            <Route
+                                exact path='/edit-playlist/:id'
+                                component={EditPlaylist} />
+                            <Route
+                                exact path='/create-album'
+                                component={CreateAlbum} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>
                 </div>
-                {/* <Footer /> */}
             </div>
         </Router>
     )
