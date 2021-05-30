@@ -21,6 +21,7 @@ import Playlists from './Playlist/Playlists';
 import CreatePlaylist from './Playlist/CreatePlaylist';
 import EditPlaylist from './Playlist/EditPlaylist';
 import CreateAlbum from './Albums/CreateAlbum';
+import ListAlbum from './Albums/ListAlbum';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -80,6 +81,9 @@ export const Admin = () => {
                             <Route
                                 exact path='/create-album'
                                 component={CreateAlbum} />
+                            <Route
+                                exact path='/list-album'
+                                component={ListAlbum} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

@@ -47,7 +47,7 @@ const LefMenu = () => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/playlists'>
+                <Link className="nav-link" to='/list-album'>
                     <i className="fas fa-compact-disc" />
                     <span>Album</span>
                 </Link>

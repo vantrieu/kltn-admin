@@ -9,6 +9,7 @@ import { trackTypesReducer } from "./TrackTypes/reducers";
 import { trackReducer } from "./Tracks/reducers";
 import { singerReducer } from "./Singers/reducers";
 import { playlistReducer } from "./Playlist/reducers";
+import { albumReducer } from "./Albums/reducers";
 
 const persistConfig = {
     key: 'root',
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
     tracktypes: trackTypesReducer,
     tracks: trackReducer,
     singers: singerReducer,
-    playlists: playlistReducer
+    playlists: playlistReducer,
+    albums: albumReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -67,8 +67,6 @@ const CreateAlbum = () => {
         }
     };
 
-    console.log(singer);
-
     return (
         <Fragment>
             <h1 className='h3 mb-4 text-gray-800'>Tạo mới Album</h1>
