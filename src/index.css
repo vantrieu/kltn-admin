@@ -33,3 +33,8 @@ code {
 .f-1 {
   font-size: 22px;
 }
+
+.f-2 {
+  margin-top: 0px !important;
+  font-size: 20px;
+}

@@ -15,7 +15,7 @@ import { ShowNotify } from "../../../store/Notify/actions";
 
 export const ListTrack = (props: any) => {
     const limit = props.match.params.limit || 20;
-    const [page] = useState<number>(props.match.params.page || 1);
+    const [page, setPage] = useState<number>(props.match.params.page || 1);
     const tracks = useSelector<AppState>((state) => state.tracks.tracks) as Array<Track>;
     const metaData = useSelector<AppState>((state) => state.tracks.metaData) as MetaData;
 
@@ -28,6 +28,7 @@ export const ListTrack = (props: any) => {
     }, [dispatch, limit, page, keyWord])
 
     const handlePageChange = (pageNumber: number) => {
+        setPage(pageNumber);
         history.push(`/list-track/limit=${limit}&page=${pageNumber}`);
     }
 
@@ -36,6 +37,7 @@ export const ListTrack = (props: any) => {
     };
 
     const handleChangeKeyword = (e: ChangeEvent<HTMLInputElement>) => {
+        setPage(1);
         const { value } = e.target;
         setKeyWord(value);
     };

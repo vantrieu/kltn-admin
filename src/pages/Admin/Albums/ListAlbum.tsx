@@ -78,7 +78,7 @@ const ListAlbum = () => {
                                                     <i className="far fa-trash-alt" />
                                                     &nbsp; Xóa
                                                 </button>
-                                                <Link className='btn btn-primary ml-1' to={`/edit-playlist/${item._id}`}>
+                                                <Link className='btn btn-primary ml-1' to={`/albums/edit-track/${item._id}`}>
                                                     <i className="fas fa-play-circle" />
                                                     &nbsp; Chỉnh sửa
                                                 </Link>

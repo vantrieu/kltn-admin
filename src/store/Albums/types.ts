@@ -23,6 +23,15 @@ export interface MetaData {
     nextPage: number | null;
 }
 
+export interface DetailAlbum {
+    tracks: Array<any>,
+    singers: Array<any>,
+    _id: string,
+    albumname: string,
+    description: string,
+    background: string,
+    createdAt: string
+}
 export interface AlbumsState {
     albums: Array<Album>;
     metaData: MetaData | null,
