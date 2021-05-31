@@ -25,7 +25,7 @@ const TopNavbar = () => {
                         <label className="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded={isShowProfilemenuDropdown ? 'true' : 'false'} onClick={() => setIsShowProfilemenuDropdown(!isShowProfilemenuDropdown)}>
                             <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user?.lastname + ' ' + user?.firstname}</span>
-                            <img className="img-profile rounded-circle" src={user?.avatar} alt="undraw_profile" />
+                            <img className="img-profile rounded-circle" src={process.env.REACT_APP_API_URL + user?.avatar} alt="undraw_profile" />
                         </label>
                         {/* Dropdown - User Information */}
                         <div className={"dropdown-menu dropdown-menu-right shadow animated--grow-in" + (isShowProfilemenuDropdown ? ' show' : '')} aria-labelledby="userDropdown">
