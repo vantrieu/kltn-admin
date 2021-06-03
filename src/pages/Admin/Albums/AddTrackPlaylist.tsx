@@ -49,8 +49,6 @@ export const AddTrackPlaylist = (props: any) => {
         fetchData();
     }, [dispatch, id, keyWord, page, reRender]);
 
-    console.log(listTrack);
-
     const handlePageChange = (pageNumber: number) => {
         setPage(pageNumber);
     }
@@ -66,6 +64,20 @@ export const AddTrackPlaylist = (props: any) => {
             singerName += ' ' + element.name + ',';
         });
         return singerName.substring(0, singerName.length - 1).trim();
+    }
+
+    const AddTrackToAlbum = async (track_id: string) => {
+        let response = await albumsServices.AddTrackToAlbum(track_id, album._id);
+        if(response.status === 200){
+            setReRender(!reRender);
+        }
+    }
+
+    const RemoveTrackFromAlbum = async (track_id: string) => {
+        let response = await albumsServices.RemoverackFromAlbum(track_id, album._id);
+        if(response.status === 200){
+            setReRender(!reRender);
+        }
     }
 
     return (
@@ -96,7 +108,8 @@ export const AddTrackPlaylist = (props: any) => {
                             key={index}
                             track={track}
                             reRender={reRender}
-                            setReRender={setReRender} />
+                            setReRender={setReRender}
+                            RemoveTrackFromAlbum={RemoveTrackFromAlbum} />
                         })}
                     </div>
                 </div>
@@ -111,7 +124,8 @@ export const AddTrackPlaylist = (props: any) => {
                                 key={index}
                                 track={track}
                                 reRender={reRender}
-                                setReRender={setReRender} />
+                                setReRender={setReRender}
+                                AddTrackToAlbum={AddTrackToAlbum} />
                         })}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>

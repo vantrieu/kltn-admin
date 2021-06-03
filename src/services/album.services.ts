@@ -45,9 +45,31 @@ const GetOptionTrack = async (id: number, page: number, keyWord: String): Promis
         })
 }
 
+const AddTrackToAlbum = async (track_id: string, album_id: String): Promise<any> => {
+    return await api.post(`/albums/add-track`, {track_id, album_id})
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
+const RemoverackFromAlbum = async (track_id: string, album_id: String): Promise<any> => {
+    return await api.put(`/albums/remove-track`, {track_id, album_id})
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const albumsServices = {
     CreateAlbum,
     GetListAlbum,
     DetailAlbum,
-    GetOptionTrack
+    GetOptionTrack,
+    AddTrackToAlbum,
+    RemoverackFromAlbum
 }
