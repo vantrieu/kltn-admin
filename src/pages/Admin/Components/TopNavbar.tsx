@@ -18,7 +18,7 @@ const TopNavbar = () => {
     }, [nofify.message])
     return (
         <div>
-            <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top" style={{zIndex: 1}}>
                 <ul className="navbar-nav ml-auto">
                     {/* Nav Item - User Information */}
                     <li className={"nav-item dropdown no-arrow" + (isShowProfilemenuDropdown ? ' show' : '')}>

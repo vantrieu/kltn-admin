@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
@@ -26,16 +26,17 @@ import { AddTrackPlaylist } from './Albums/AddTrackPlaylist';
 
 export const Admin = () => {
     const dispatch = useDispatch();
+    const [toggled, setToggled] = useState(false);
     useEffect(() => {
         dispatch(GetMyProfile());
     }, [dispatch]);
     return (
         <Router history={history}>
-            <LeftMenu />
+            <LeftMenu toggled={toggled} setToggled={setToggled}/>
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <TopNavBar />
-                    <div className="container-fluid">
+                    <div className="container-fluid shadow" style={ toggled ? {paddingTop: '80px', paddingLeft: '120px', height: '100%'} : {paddingTop: '80px', paddingLeft: '240px', height: '100%'}}>
                         <Switch>
                             <Route
                                 exact path='/'

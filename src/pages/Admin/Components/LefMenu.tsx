@@ -1,11 +1,9 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const LefMenu = () => {
-    const [toggled, setToggled] = useState(false);
+const LefMenu = (props: any) => {
 
     return (
-        <ul className={"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" + (toggled ? ' toggled' : '')} id="accordionSidebar">
+        <ul className={"navbar-nav bg-gradient-primary fixed-top sidebar sidebar-dark accordion" + (props.toggled ? ' toggled' : '')} id="accordionSidebar">
             <Link className="sidebar-brand d-flex align-items-center justify-content-center" to="/">
                 <div className="sidebar-brand-icon rotate-n-15">
                     <i className="fas fa-laugh-wink" />
@@ -20,6 +18,12 @@ const LefMenu = () => {
                 <Link className="nav-link" to='/'>
                     <i className="fas fa-users" />
                     <span>Người dùng</span>
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to='/'>
+                    <i className="fas fa-users" />
+                    <span>Người kiểm duyệt</span>
                 </Link>
             </li>
             <li className="nav-item">
@@ -52,8 +56,14 @@ const LefMenu = () => {
                     <span>Album</span>
                 </Link>
             </li>
+            <li className="nav-item">
+                <Link className="nav-link" to='/list-album'>
+                    <i className="fas fa-comments" />
+                    <span>Bình luận</span>
+                </Link>
+            </li>
             <hr className="sidebar-divider d-none d-md-block" />
-            <div className="text-center d-none d-md-inline" onClick={() => setToggled(!toggled)}>
+            <div className="text-center d-none d-md-inline" onClick={() => props.setToggled(!props.toggled)}>
                 <button className="rounded-circle border-0" id="sidebarToggle" />
             </div>
         </ul>
