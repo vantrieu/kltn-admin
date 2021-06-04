@@ -68,11 +68,22 @@ const RemoveTrack = async (playlist_id: string, track_id: string): Promise<any> 
     })
 }
 
+const DeletePlaylistById = async (playlist_id: String): Promise<any> => {
+    return await api.delete(`/playlists/delete/${playlist_id}`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const playlistsServices = {
     GetListPlaylist,
     CreatePlayList,
     GetPlaylistById,
     AddTrackToPlaylist,
     GetOptionTrack,
-    RemoveTrack
+    RemoveTrack,
+    DeletePlaylistById
 }

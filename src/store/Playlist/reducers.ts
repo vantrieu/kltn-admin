@@ -3,7 +3,8 @@ import {
     PlaylistsState,
     LOAD_PLAYLIST_REQUEST,
     LOAD_PLAYLIST_SUCCESS,
-    LOAD_PLAYLIST_FAILURE
+    LOAD_PLAYLIST_FAILURE,
+    DELETE_PLAYLIST
 } from "./types";
 
 const initialState: PlaylistsState = {
@@ -11,6 +12,13 @@ const initialState: PlaylistsState = {
     metaData: null,
     loading: false,
     error: null
+}
+
+const RefreshItems = (playlistsState: PlaylistsState, playlist_id: string) => {
+    const listPlaylist = [...playlistsState.playlists];
+    const index = listPlaylist?.findIndex(u => u._id === playlist_id);
+    listPlaylist?.splice(index, 1);
+    return listPlaylist;
 }
 
 const playlistReducer = (
@@ -37,6 +45,12 @@ const playlistReducer = (
                 ...state,
                 loading: false,
                 error: action.payload.error
+            }
+        }
+        case DELETE_PLAYLIST: {
+            return {
+                ...state,
+                playlists: RefreshItems(state, action.payload.playlist_id)
             }
         }
         default:

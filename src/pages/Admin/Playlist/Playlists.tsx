@@ -6,9 +6,12 @@ import { AppState } from "../../../store";
 import { MetaData } from "../../../store/Tracks/types";
 import Pagination from "react-js-pagination";
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { GetListPlaylist } from "../../../store/Playlist/actions";
+import { DeletePlaylist, GetListPlaylist } from "../../../store/Playlist/actions";
 import { Playlist } from "../../../store/Playlist/types";
 import moment from "moment";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { ShowNotify } from '../../../store/Notify/actions';
 
 const Playlists = (props: any) => {
     const playlists = useSelector<AppState>((state) => state.playlists.playlists) as Array<Playlist>;
@@ -30,6 +33,26 @@ const Playlists = (props: any) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setKeyWord(value);
+    };
+
+    const handleDelete = (playlist: Playlist) => {
+        confirmAlert({
+            title: 'Xác nhận!',
+            message: `Bạn chắc chắn xóa playlist: ${playlist.playlistname}`,
+            buttons: [
+                {
+                    label: 'Xóa',
+                    onClick: () => {
+                        dispatch(DeletePlaylist(playlist._id));
+                        dispatch(ShowNotify(`Đã xóa playlist: ${playlist.playlistname}!`));
+                    }
+                },
+                {
+                    label: 'Hủy',
+                    onClick: () => dispatch(ShowNotify('Đã hủy hành động xóa!'))
+                }
+            ]
+        });
     };
 
     return (
@@ -81,7 +104,7 @@ const Playlists = (props: any) => {
                                             <td>{item.description}</td>
                                             <td>{moment(item.createdAt).format('DD/MM/YYYY')}</td>
                                             <td>
-                                                <button className="btn btn-danger ml-1 mr-1" >
+                                                <button className="btn btn-danger ml-1 mr-1" onClick={() => handleDelete(item)}>
                                                     <i className="far fa-trash-alt" />
                                                     &nbsp; Xóa
                                                 </button>

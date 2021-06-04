@@ -1,6 +1,7 @@
 export const LOAD_PLAYLIST_SUCCESS = 'LOAD_PLAYLIST_SUCCESS';
 export const LOAD_PLAYLIST_REQUEST = 'LOAD_PLAYLIST_REQUEST';
 export const LOAD_PLAYLIST_FAILURE = 'LOAD_PLAYLIST_FAILURE';
+export const DELETE_PLAYLIST = 'DELETE_PLAYLIST';
 
 export interface MetaData {
     totalDocs: number;
@@ -50,7 +51,15 @@ interface LoadPlaylistFailure {
     }
 }
 
+interface DeletePlaylistById {
+    type: typeof DELETE_PLAYLIST,
+    payload: {
+        playlist_id: string
+    }
+}
+
 export type PlaylistsActionTypes =
     | LoadPlaylistRequest
     | LoadPlaylistSuccess
     | LoadPlaylistFailure
+    | DeletePlaylistById
