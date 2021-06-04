@@ -1,9 +1,10 @@
 import { Dispatch } from "redux";
 import { albumsServices } from "../../services";
-import { 
-    AlbumsActionTypes, 
-    LOAD_ALBUM_FAILURE, 
-    LOAD_ALBUM_REQUEST, 
+import {
+    AlbumsActionTypes,
+    DELETE_ALBUM,
+    LOAD_ALBUM_FAILURE,
+    LOAD_ALBUM_REQUEST,
     LOAD_ALBUM_SUCCESS
 } from "./types";
 
@@ -30,5 +31,20 @@ export const GetListAlbum = (limit: number, page: number, keyWord: string) => {
                 },
             });
         }
+    }
+}
+
+export const DeleteAlbum = (album_id: string) => {
+    return async (dispatch: Dispatch<AlbumsActionTypes>) => {
+        const response = await albumsServices.DeleteAlbumById(album_id);
+        if (response.data.status === 200) {
+            dispatch({
+                type: DELETE_ALBUM,
+                payload: {
+                    album_id: album_id 
+                }
+            });
+        }
+
     }
 }

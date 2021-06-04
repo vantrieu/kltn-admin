@@ -65,11 +65,22 @@ const RemoverackFromAlbum = async (track_id: string, album_id: String): Promise<
         })
 }
 
+const DeleteAlbumById = async (album_id: String): Promise<any> => {
+    return await api.delete(`/albums/delete/${album_id}`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const albumsServices = {
     CreateAlbum,
     GetListAlbum,
     DetailAlbum,
     GetOptionTrack,
     AddTrackToAlbum,
-    RemoverackFromAlbum
+    RemoverackFromAlbum,
+    DeleteAlbumById
 }

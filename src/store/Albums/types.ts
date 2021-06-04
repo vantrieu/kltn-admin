@@ -1,6 +1,7 @@
 export const LOAD_ALBUM_REQUEST = 'LOAD_ALBUM_REQUEST';
 export const LOAD_ALBUM_SUCCESS = 'LOAD_ALBUM_SUCCESS';
 export const LOAD_ALBUM_FAILURE = 'LOAD_ALBUM_FAILURE';
+export const DELETE_ALBUM = 'DELETE_ALBUM';
 
 export interface Album {
     _id: string;
@@ -58,7 +59,15 @@ interface LoadAlbumFailure {
     }
 }
 
+interface DeleteAlbum {
+    type: typeof DELETE_ALBUM,
+    payload: {
+        album_id: string
+    }
+}
+
 export type AlbumsActionTypes =
     | LoadAlbumRequest
     | LoadAlbumSuccess
     | LoadAlbumFailure
+    | DeleteAlbum

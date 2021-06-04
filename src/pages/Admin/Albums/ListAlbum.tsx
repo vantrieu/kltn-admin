@@ -2,10 +2,13 @@ import React, { ChangeEvent, Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppState } from '../../../store';
-import { GetListAlbum } from '../../../store/Albums/actions';
+import { DeleteAlbum, GetListAlbum } from '../../../store/Albums/actions';
 import { Album, MetaData } from '../../../store/Albums/types';
 import Pagination from "react-js-pagination";
 import moment from 'moment';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { ShowNotify } from '../../../store/Notify/actions';
 
 const ListAlbum = () => {
     const albums = useSelector<AppState>((state) => state.albums.albums) as Array<Album>;
@@ -27,6 +30,26 @@ const ListAlbum = () => {
         setKeyWord(value);
     };
 
+    const handleDelete = (album: Album) => {
+        confirmAlert({
+            title: 'Xác nhận!',
+            message: `Bạn chắc chắn xóa album: ${album.albumname}`,
+            buttons: [
+                {
+                    label: 'Xóa',
+                    onClick: () => {
+                        dispatch(DeleteAlbum(album._id));
+                        dispatch(ShowNotify(`Đã xóa album: ${album.albumname}!`));
+                    }
+                },
+                {
+                    label: 'Hủy',
+                    onClick: () => dispatch(ShowNotify('Đã hủy hành động xóa!'))
+                }
+            ]
+        });
+    };
+
     return (
         <Fragment>
             <div className="row">
@@ -44,7 +67,7 @@ const ListAlbum = () => {
                     <h6 className="m-0 font-weight-bold text-primary">Danh sách playlist</h6>
                 </div>
                 <div className="card-body">
-                <div className="form-group row">
+                    <div className="form-group row">
                         <div className="col-sm-12 col-md-6 pl-4">
                         </div>
                         <div className="col-sm-12 col-md-6">
@@ -74,7 +97,7 @@ const ListAlbum = () => {
                                             <td>{moment(item.createdAt).format('DD/MM/YYYY')}</td>
                                             <td>{moment(item.updatedAt).format('DD/MM/YYYY')}</td>
                                             <td>
-                                                <button className="btn btn-danger ml-1 mr-1" >
+                                                <button className="btn btn-danger ml-1 mr-1" onClick={() => handleDelete(item)}>
                                                     <i className="far fa-trash-alt" />
                                                     &nbsp; Xóa
                                                 </button>

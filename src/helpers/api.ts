@@ -1,4 +1,7 @@
+import { history } from './history';
 import axios from 'axios';
+import { store } from '../store';
+import { logout } from '../store/Account/actions';
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
@@ -15,8 +18,13 @@ const api = axios.create({
  logout the user if the token has expired
 **/
 api.interceptors.response.use(
-  (res) => res,
-  (err) => {
+  (res) => {
+    if(res.data.status === 403){
+      store.dispatch(logout());
+      history.push('/');
+    }
+    return res
+  }, (err) => {
     if (err.response.status === 401) {
       //todo
     }
