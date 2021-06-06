@@ -41,9 +41,55 @@ const ResetPassWord = async (password: string, token: string) => {
         })
 }
 
+const GetListUser = async (page: number, keyWord: String): Promise<any> => {
+    keyWord = keyWord.length === 0 ? '' : `&keyword=${keyWord}`;
+    return await api.get(`/accounts/list-account?limit=25&page=${page}${keyWord}`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
+const GetListModerator = async (page: number, keyWord: String): Promise<any> => {
+    keyWord = keyWord.length === 0 ? '' : `&keyword=${keyWord}`;
+    return await api.get(`/accounts/list-moderator?limit=25&page=${page}${keyWord}`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
+const LockAccount = async (id: string): Promise<any> => {
+    return await api.post('/accounts/lock-account', id)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
+const UnLockAccount = async (id: string): Promise<any> => {
+    return await api.post('/accounts/lock-account', id)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const userService = {
     login,
     GetMyProfile,
     FotgotPassword,
-    ResetPassWord
+    ResetPassWord,
+    GetListUser,
+    GetListModerator,
+    LockAccount,
+    UnLockAccount
 }
