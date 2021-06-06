@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Router, Route, Switch } from 'react-router-dom';
 import { GetMyProfile } from '../../store/Account/actions';
 import { NotFound } from '../Account';
@@ -25,8 +25,10 @@ import ListAlbum from './Albums/ListAlbum';
 import { AddTrackPlaylist } from './Albums/AddTrackPlaylist';
 import { ListModerator } from './Moderators/ListModerator';
 import { AddModerator } from './Moderators/AddModerator';
+import { AppState } from '../../store';
 
 export const Admin = () => {
+    const [account] = useState(useSelector((state: AppState) => state.account));
     const dispatch = useDispatch();
     const [toggled, setToggled] = useState(false);
     useEffect(() => {
@@ -34,18 +36,20 @@ export const Admin = () => {
     }, [dispatch]);
     return (
         <Router history={history}>
-            <LeftMenu toggled={toggled} setToggled={setToggled}/>
+            <LeftMenu toggled={toggled} setToggled={setToggled} />
             <div id="content-wrapper" className="d-flex flex-column">
                 <div id="content">
                     <TopNavBar />
-                    <div className="container-fluid shadow" style={ toggled ? {paddingTop: '80px', paddingLeft: '120px', height: '100%'} : {paddingTop: '80px', paddingLeft: '240px', height: '100%'}}>
+                    <div className="container-fluid shadow" style={toggled ? { paddingTop: '80px', paddingLeft: '120px', height: '100%' } : { paddingTop: '80px', paddingLeft: '240px', height: '100%' }}>
                         <Switch>
                             <Route
                                 exact path='/'
                                 component={ListUser} />
-                            <Route
-                                exact path='/moderator'
-                                component={ListModerator} />
+                            {account.role === 'Administrator' ?
+                                <Route
+                                    exact path='/moderator'
+                                    component={ListModerator} /> : null
+                            }
                             <Route
                                 exact path='/create-moderator'
                                 component={AddModerator} />
