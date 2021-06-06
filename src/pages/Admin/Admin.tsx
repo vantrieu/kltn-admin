@@ -23,6 +23,7 @@ import EditPlaylist from './Playlist/EditPlaylist';
 import CreateAlbum from './Albums/CreateAlbum';
 import ListAlbum from './Albums/ListAlbum';
 import { AddTrackPlaylist } from './Albums/AddTrackPlaylist';
+import { ListModerator } from './Moderators/ListModerator';
 
 export const Admin = () => {
     const dispatch = useDispatch();
@@ -41,6 +42,9 @@ export const Admin = () => {
                             <Route
                                 exact path='/'
                                 component={ListUser} />
+                            <Route
+                                exact path='/moderator'
+                                component={ListModerator} />
                             <Route
                                 exact path='/singer'
                                 component={ListSinger} />

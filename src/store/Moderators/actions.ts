@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { albumsServices } from '../../services';
+import { albumsServices, userService } from '../../services';
 import { 
     LOAD_MODERATOR_FAILURE,
     LOAD_MODERATOR_REQUEST, 
@@ -9,14 +9,14 @@ import {
     UN_LOCK_MODERATOR
 } from "./types";
 
-export const GetListModerator = (limit: number, page: number, keyWord: string) => {
+export const GetListModerator = (page: number, keyWord: string) => {
     return async (dispatch: Dispatch<ModeratorsActionTypes>) => {
         dispatch({
             type: LOAD_MODERATOR_REQUEST
         });
 
         try {
-            const response = await albumsServices.GetListAlbum(limit, page, keyWord);
+            const response = await userService.GetListModerator(page, keyWord);
             dispatch({
                 type: LOAD_MODERATOR_SUCCESS,
                 payload: {
@@ -37,7 +37,7 @@ export const GetListModerator = (limit: number, page: number, keyWord: string) =
 
 export const LockModerator = (_id: string) => {
     return async (dispatch: Dispatch<ModeratorsActionTypes>) => {
-        const response = await albumsServices.DeleteAlbumById(_id);
+        const response = await userService.LockAccount(_id);
         if (response.data.status === 200) {
             dispatch({
                 type: LOCK_MODERATOR,
@@ -52,7 +52,7 @@ export const LockModerator = (_id: string) => {
 
 export const UnLockModerator = (_id: string) => {
     return async (dispatch: Dispatch<ModeratorsActionTypes>) => {
-        const response = await albumsServices.DeleteAlbumById(_id);
+        const response = await userService.UnLockAccount(_id);
         if (response.data.status === 200) {
             dispatch({
                 type: UN_LOCK_MODERATOR,

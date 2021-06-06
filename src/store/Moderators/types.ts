@@ -4,13 +4,13 @@ export const LOAD_MODERATOR_FAILURE = 'LOAD_MODERATOR_FAILURE';
 export const LOCK_MODERATOR = 'LOCK_MODERATOR';
 export const UN_LOCK_MODERATOR = 'UN_LOCK_MODERATOR';
 
-export interface User {
+export interface Moderator {
     _id: string,
     username: string,
     email: string,
     phonenumber: string,
     createdAt: string,
-    isLock: number
+    islock: number
 }
 
 export interface MetaData {
@@ -26,7 +26,7 @@ export interface MetaData {
 }
 
 export interface ModeratorsState {
-    moderators: Array<User>;
+    moderators: Array<Moderator>;
     metaData: MetaData | null,
     loading: boolean;
     error: string | null;
@@ -39,7 +39,7 @@ interface LoadModeratorRequest {
 interface LoadModeratorSuccess {
     type: typeof LOAD_MODERATOR_SUCCESS,
     payload: {
-        moderators: Array<User>,
+        moderators: Array<Moderator>,
         metaData: MetaData
     }
 }

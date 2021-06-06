@@ -21,7 +21,7 @@ const LefMenu = (props: any) => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/'>
+                <Link className="nav-link" to='/moderator'>
                     <i className="fas fa-users" />
                     <span>Người kiểm duyệt</span>
                 </Link>

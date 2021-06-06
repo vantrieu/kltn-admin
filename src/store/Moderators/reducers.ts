@@ -19,7 +19,7 @@ const RefreshState = (moderatorsState: ModeratorsState, user_id: string, state: 
     const lstModerator = [...moderatorsState.moderators];
     const index = lstModerator?.findIndex(u => u._id === user_id);
     const moderator = lstModerator[index];
-    moderator.isLock = state;
+    moderator.islock = state;
     lstModerator?.splice(index, 1, moderator);
     return lstModerator;
 }

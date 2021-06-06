@@ -63,8 +63,8 @@ const GetListModerator = async (page: number, keyWord: String): Promise<any> => 
         })
 }
 
-const LockAccount = async (id: string): Promise<any> => {
-    return await api.post('/accounts/lock-account', id)
+const LockAccount = async (_id: string): Promise<any> => {
+    return await api.post('/accounts/lock-account', {id: _id})
         .then(response => {
             return response;
         })
@@ -73,8 +73,8 @@ const LockAccount = async (id: string): Promise<any> => {
         })
 }
 
-const UnLockAccount = async (id: string): Promise<any> => {
-    return await api.post('/accounts/lock-account', id)
+const UnLockAccount = async (_id: string): Promise<any> => {
+    return await api.post('/accounts/un-lock-account', {id: _id})
         .then(response => {
             return response;
         })
