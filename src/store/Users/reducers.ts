@@ -19,7 +19,7 @@ const RefreshState = (usersState: UsersState, user_id: string, state: number) =>
     const lstUser = [...usersState.users];
     const index = lstUser?.findIndex(u => u._id === user_id);
     const user = lstUser[index];
-    user.isLock = state;
+    user.islock = state;
     lstUser?.splice(index, 1, user);
     return lstUser;
 }

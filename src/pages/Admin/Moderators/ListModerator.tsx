@@ -6,7 +6,7 @@ import { AppState } from "../../../store";
 import Pagination from "react-js-pagination";
 import moment from "moment";
 import { ShowNotify } from '../../../store/Notify/actions';
-import { MetaData, User } from "../../../store/Users/types";
+import { MetaData } from "../../../store/Users/types";
 import { Moderator } from "../../../store/Moderators/types";
 import { GetListModerator, LockModerator, UnLockModerator } from "../../../store/Moderators/actions";
 
@@ -48,7 +48,7 @@ export const ListModerator = () => {
                 <div className="col-6">
                 </div>
                 <div className="col-6 text-right mb-2">
-                    <Link className="btn btn-success" to='/create-playlist'>
+                    <Link className="btn btn-success" to='/create-moderator'>
                         <i className="fas fa-plus" />
                         &nbsp; Tạo mới người kiểm duyệt
                     </Link>
@@ -65,7 +65,7 @@ export const ListModerator = () => {
                         <div className="col-sm-12 col-md-6">
                             <div id="dataTable_filter" style={{ float: 'right' }}>
                                 <label>Tìm kiếm:&nbsp;</label>
-                                <input type="search" className='border' placeholder='tên người dùng' aria-controls="dataTable" onChange={handleChange} />
+                                <input type="search" className='border' placeholder='tên người kiểm duyệt' aria-controls="dataTable" onChange={handleChange} />
                             </div>
                         </div>
                     </div>

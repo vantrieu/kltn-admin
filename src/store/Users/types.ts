@@ -16,7 +16,7 @@ export interface User {
     email: string,
     phonenumber: string,
     createdAt: string,
-    isLock: number
+    islock: number
 }
 
 export interface MetaData {

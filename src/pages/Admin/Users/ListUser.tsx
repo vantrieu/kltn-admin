@@ -1,14 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { AppState } from "../../../store";
 import Pagination from "react-js-pagination";
-import 'react-confirm-alert/src/react-confirm-alert.css';
-import moment from "moment"; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import moment from "moment";
 import { ShowNotify } from '../../../store/Notify/actions';
-import { GetListUser } from "../../../store/Users/actions";
+import { GetListUser, LockUser, UnLockUser } from "../../../store/Users/actions";
 import { MetaData, User } from "../../../store/Users/types";
 
 export const ListUser = () => {
@@ -32,6 +29,16 @@ export const ListUser = () => {
         const { value } = e.target;
         setKeyWord(value);
     };
+
+    const unLock = (user: User) => {
+        dispatch(UnLockUser(user._id));
+        dispatch(ShowNotify(`Đã mở khóa tài khoản: ${user.username}`));
+    }
+
+    const lock = (user: User) => {
+        dispatch(LockUser(user._id));
+        dispatch(ShowNotify(`Đã khóa tài khoản: ${user.username}`));
+    }
 
     return (
         <Fragment>
@@ -72,10 +79,17 @@ export const ListUser = () => {
                                             <td>{item.phonenumber}</td>
                                             <td>{moment(item.createdAt).format('DD-MM-YYYY')}</td>
                                             <td>
-                                                <button className="btn btn-danger ml-1 mr-1">
-                                                    <i className="far fa-trash-alt" />
-                                                    &nbsp; Xóa
-                                                </button>
+                                                {
+                                                    (item.islock === 1) ?
+                                                        <button className="btn btn-danger" onClick={() => unLock(item)}>
+                                                            <i className="fas fa-lock" />
+                                                            &nbsp; Mở khóa
+                                                        </button> :
+                                                        <button className="btn btn-success" onClick={() => lock(item)}>
+                                                            <i className="fas fa-lock-open" />
+                                                            &nbsp; Khóa
+                                                        </button>
+                                                }
                                             </td>
                                         </tr>
                                     )
