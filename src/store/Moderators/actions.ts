@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { albumsServices, userService } from '../../services';
+import { userService } from '../../services';
 import { 
     LOAD_MODERATOR_FAILURE,
     LOAD_MODERATOR_REQUEST, 
