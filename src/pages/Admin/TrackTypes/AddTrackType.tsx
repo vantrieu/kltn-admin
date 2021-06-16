@@ -11,17 +11,36 @@ export const AddTrackType = (props: any) => {
     });
     const [submitted, setSubmitted] = useState(false);
     const { typename } = inputs;
+    const [formData, setFormData] = useState(new FormData());
+    const [selectImages, setSelectimages] = useState(Array<string>());
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setInputs((inputs) => ({ ...inputs, [name]: value }));
     };
+
+    const imageHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const fileArray = [];
+        const formData = new FormData();
+        if (e.target.files) {
+            for (let i = 0; i < e.target.files.length; i++) {
+                fileArray.push(URL.createObjectURL(e.target.files[i]));
+                formData.append("background", e.target.files[i], e.target.files[i].name);
+            }
+            setSelectimages(fileArray);
+        }
+        setFormData(formData);
+    }
+
     const dispatch = useDispatch();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmitted(true);
         if (typename) {
-            const response = await trackTypesServices.CreateTrackType(typename);
+            const formDataSubmit = formData;
+            formDataSubmit.append('typename', typename);
+            const response = await trackTypesServices.CreateTrackType(formDataSubmit);
             if(response.data.status === 201){
                 dispatch(ShowNotify('Thêm mới thể loại thành công'));
                 history.goBack();
@@ -45,6 +64,17 @@ export const AddTrackType = (props: any) => {
                                     </div>
                                 )}
                             </div>
+                        </div>
+                        <div className='form-group'>
+                            <label>Ảnh đại diện</label>
+                            <input type='file' accept="image/*" className="form-control" onChange={imageHandleChange} />
+                        </div>
+                        <div className='form-group row' style={{ justifyContent: 'center' }}>
+                            {selectImages.map((item, index) => {
+                                return (
+                                    <img className="col-2" key={index} src={item} alt="preview" />
+                                )
+                            })}
                         </div>
                         <div className='form-group'>
                             <button className='btn btn-primary mr-1' type='submit'>

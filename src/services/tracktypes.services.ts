@@ -1,8 +1,8 @@
 import { api } from '../helpers/index';
 import { TrackTypes } from '../store/TrackTypes/types';
 
-const CreateTrackType = async (typename: string): Promise<any> => {
-    return await api.post('/tracktypes/create', { typename })
+const CreateTrackType = async (body: FormData): Promise<any> => {
+    return await api.post('/tracktypes/create', body)
         .then(response => {
             return response;
         })
