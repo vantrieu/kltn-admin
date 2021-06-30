@@ -61,12 +61,12 @@ const LefMenu = (props: any) => {
                     <span>Bảng xếp hạng bài hát</span>
                 </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
                 <Link className="nav-link" to='/list-album'>
                     <i className="fas fa-comments" />
                     <span>Bảng xếp hạng ca sĩ</span>
                 </Link>
-            </li>
+            </li> */}
             <hr className="sidebar-divider d-none d-md-block" />
             <div className="text-center d-none d-md-inline" onClick={() => props.setToggled(!props.toggled)}>
                 <button className="rounded-circle border-0" id="sidebarToggle" />
