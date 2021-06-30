@@ -26,6 +26,7 @@ import { AddTrackPlaylist } from './Albums/AddTrackPlaylist';
 import { ListModerator } from './Moderators/ListModerator';
 import { AddModerator } from './Moderators/AddModerator';
 import { AppState } from '../../store';
+import { TopTrack } from './statistics/TopTrack';
 
 export const Admin = () => {
     const [account] = useState(useSelector((state: AppState) => state.account));
@@ -101,6 +102,9 @@ export const Admin = () => {
                             <Route
                                 exact path='/albums/edit-track/:id'
                                 component={AddTrackPlaylist} />
+                            <Route
+                                exact path='/top-track'
+                                component={TopTrack} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

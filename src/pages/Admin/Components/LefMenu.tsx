@@ -56,7 +56,7 @@ const LefMenu = (props: any) => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/list-album'>
+                <Link className="nav-link" to='/top-track'>
                     <i className="fas fa-compact-disc" />
                     <span>Bảng xếp hạng bài hát</span>
                 </Link>

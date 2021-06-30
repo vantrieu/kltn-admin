@@ -34,7 +34,7 @@ export const ListSinger = () => {
                             <thead>
                                 <tr>
                                     <th>Tên ca sĩ</th>
-                                    <th>Hình ảnh</th>
+                                    {/* <th>Hình ảnh</th> */}
                                     <th>Tiểu sử</th>
                                     <th>Ngày tạo</th>
                                     <th>Ngày cập nhật</th>
@@ -47,9 +47,9 @@ export const ListSinger = () => {
                                         <tr key={index}>
                                             <td>{item.name}</td>
                                             
-                                            <td>
+                                            {/* <td>
                                                 <img src={process.env.REACT_APP_API_URL + item.avatar} alt={item.name} />
-                                            </td>
+                                            </td> */}
                                             <td>{item.description}</td>
                                             <td>{moment(item.createdAt).format('DD/MM/YYYY')}</td>
                                             <td>{moment(item.updatedAt).format('DD/MM/YYYY')}</td>

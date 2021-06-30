@@ -3,7 +3,6 @@ import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState } from "../../../store";
 import Pagination from "react-js-pagination";
-import moment from "moment";
 import { ShowNotify } from '../../../store/Notify/actions';
 import { GetListUser, LockUser, UnLockUser } from "../../../store/Users/actions";
 import { MetaData, User } from "../../../store/Users/types";
@@ -77,7 +76,7 @@ export const ListUser = () => {
                                             <td>{item.username}</td>
                                             <td>{item.email}</td>
                                             <td>{item.phonenumber}</td>
-                                            <td>{moment(item.createdAt).format('DD-MM-YYYY')}</td>
+                                            <td>{item.createdAt}</td>
                                             <td>
                                                 {
                                                     (item.islock === 1) ?

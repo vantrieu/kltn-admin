@@ -41,9 +41,20 @@ const DeleteTrack = async (id: string): Promise<any> => {
         })
 }
 
+const GetHotTrack = async (): Promise<any> => {
+    return await api.get(`/tracks/top-music`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const trackService = {
     CreateTrack,
     GetListTrack,
     UpdateTrack,
-    DeleteTrack
+    DeleteTrack,
+    GetHotTrack
 }
