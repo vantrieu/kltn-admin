@@ -93,6 +93,16 @@ const CreateModerator = async (body: any): Promise<any> => {
         })
 }
 
+const ChangePassword = async (body: any):Promise<any> => {
+    return await api.put('/accounts/change-password', body)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const userService = {
     login,
     GetMyProfile,
@@ -102,5 +112,6 @@ export const userService = {
     GetListModerator,
     LockAccount,
     UnLockAccount,
-    CreateModerator
+    CreateModerator,
+    ChangePassword
 }

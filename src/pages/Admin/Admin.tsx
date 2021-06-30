@@ -5,8 +5,6 @@ import { GetMyProfile } from '../../store/Account/actions';
 import { NotFound } from '../Account';
 import LeftMenu from './Components/LefMenu';
 import TopNavBar from './Components/TopNavbar';
-import EditProfile from './Profile/EditProfile';
-import ViewProfile from './Profile/ViewProfile';
 import { history } from '../../helpers';
 import { ListUser } from './Users/ListUser';
 import { ListTrackTypes } from './TrackTypes/ListTrackTypes';
@@ -27,6 +25,7 @@ import { ListModerator } from './Moderators/ListModerator';
 import { AddModerator } from './Moderators/AddModerator';
 import { AppState } from '../../store';
 import { TopTrack } from './statistics/TopTrack';
+import { ChangePassword } from './Profile/ChangePassword';
 
 export const Admin = () => {
     const [account] = useState(useSelector((state: AppState) => state.account));
@@ -79,11 +78,8 @@ export const Admin = () => {
                                 exact path='/add-track'
                                 component={AddTrack} />
                             <Route
-                                exact path='/my-profile'
-                                component={ViewProfile} />
-                            <Route
-                                exact path='/update-profile'
-                                component={EditProfile} />
+                                exact path='/change-password'
+                                component={ChangePassword} />
                             <Route
                                 exact path='/playlists'
                                 component={Playlists} />

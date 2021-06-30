@@ -18,7 +18,7 @@ const TopNavbar = () => {
     }, [nofify.message])
     return (
         <div>
-            <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top" style={{zIndex: 1}}>
+            <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow fixed-top" style={{ zIndex: 1 }}>
                 <ul className="navbar-nav ml-auto">
                     {/* Nav Item - User Information */}
                     <li className={"nav-item dropdown no-arrow" + (isShowProfilemenuDropdown ? ' show' : '')}>
@@ -29,9 +29,9 @@ const TopNavbar = () => {
                         </label>
                         {/* Dropdown - User Information */}
                         <div className={"dropdown-menu dropdown-menu-right shadow animated--grow-in" + (isShowProfilemenuDropdown ? ' show' : '')} aria-labelledby="userDropdown">
-                            <Link className="dropdown-item" to='/my-profile'  onClick={() => setIsShowProfilemenuDropdown(!isShowProfilemenuDropdown)}>
+                            <Link className="dropdown-item" to='/change-password' onClick={() => setIsShowProfilemenuDropdown(!isShowProfilemenuDropdown)}>
                                 <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-                                    Thông tin cá nhân
+                                Đổi mật khẩu
                             </Link>
                             <div className="dropdown-divider" />
                             <label className="dropdown-item" onClick={() => dispatch(logout())}>
