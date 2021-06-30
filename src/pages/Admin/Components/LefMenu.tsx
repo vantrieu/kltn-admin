@@ -50,21 +50,21 @@ const LefMenu = (props: any) => {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to='/playlists'>
-                    <i className="fab fa-jedi-order" />
-                    <span>Playlist</span>
-                </Link>
-            </li>
-            <li className="nav-item">
                 <Link className="nav-link" to='/list-album'>
-                    <i className="fas fa-compact-disc" />
+                    <i className="fab fa-jedi-order" />
                     <span>Album</span>
                 </Link>
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to='/list-album'>
+                    <i className="fas fa-compact-disc" />
+                    <span>Bảng xếp hạng bài hát</span>
+                </Link>
+            </li>
+            <li className="nav-item">
+                <Link className="nav-link" to='/list-album'>
                     <i className="fas fa-comments" />
-                    <span>Bình luận</span>
+                    <span>Bảng xếp hạng ca sĩ</span>
                 </Link>
             </li>
             <hr className="sidebar-divider d-none d-md-block" />

@@ -64,7 +64,7 @@ const ListAlbum = () => {
             </div>
             <div className="card shadow mb-4">
                 <div className="card-header py-3">
-                    <h6 className="m-0 font-weight-bold text-primary">Danh sách playlist</h6>
+                    <h6 className="m-0 font-weight-bold text-primary">Danh sách Album</h6>
                 </div>
                 <div className="card-body">
                     <div className="form-group row">
