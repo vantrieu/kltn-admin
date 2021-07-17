@@ -103,6 +103,17 @@ const ChangePassword = async (body: any):Promise<any> => {
         })
 }
 
+const BackupDatabase = async ():Promise<any> => {
+    console.log("backup database")
+    return await api.post('/backup', null)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            return Promise.reject(error);
+        })
+}
+
 export const userService = {
     login,
     GetMyProfile,
@@ -113,5 +124,6 @@ export const userService = {
     LockAccount,
     UnLockAccount,
     CreateModerator,
-    ChangePassword
+    ChangePassword,
+    BackupDatabase
 }
