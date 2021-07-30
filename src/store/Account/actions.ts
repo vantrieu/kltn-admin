@@ -24,10 +24,11 @@ export const login = (username: string, password: string, from: string) => {
 
         try {
             const response = await userService.login(username, password);
-            if (response.status === 200 && (response.data.role === 'Moderator' || response.data.role === 'Administrator')) {
+            console.log(response)
+            if (response.status === 200 && (response.data.items.role === 'Moderator' || response.data.items.role === 'Administrator')) {
                 dispatch({
                     type: LOGIN_SUCCESS,
-                    payload: response.data,
+                    payload: response.data.items,
                 });
                 history.push(from);
             } else {
